@@ -49,16 +49,24 @@
   });
 })();
 
-// --- Бургер-меню (мобильная навигация) ---
+// --- Бургер-меню (мобильная навигация, весь экран + блокировка скролла) ---
 (function initBurger() {
   const burger = document.getElementById('burger');
   const nav = document.getElementById('nav');
   const links = nav.querySelectorAll('.header__link');
 
+  // Блокируем/разблокируем скролл страницы при открытом меню (правило 10.3)
+  const toggleBodyScroll = (lock) => {
+    document.body.style.overflow = lock ? 'hidden' : '';
+    document.body.style.position = lock ? 'fixed' : '';
+    document.body.style.width = lock ? '100%' : '';
+  };
+
   const toggleMenu = (open) => {
     burger.classList.toggle('is-open', open);
     nav.classList.toggle('is-open', open);
     burger.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+    toggleBodyScroll(open);
   };
 
   // Открыть/закрыть по клику на бургер
@@ -67,7 +75,7 @@
     toggleMenu(!isOpen);
   });
 
-  // Закрыть меню при клике на ссылку
+  // Закрыть меню при клике на ссылку (пункт меню)
   links.forEach((link) => {
     link.addEventListener('click', () => toggleMenu(false));
   });
@@ -79,11 +87,53 @@
     }
   });
 
-  // Закрыть при клике вне меню
+  // Закрыть при клике вне меню (по фону/оверлею)
   document.addEventListener('click', (e) => {
     const isMenuClick = nav.contains(e.target) || burger.contains(e.target);
     if (!isMenuClick && nav.classList.contains('is-open')) {
       toggleMenu(false);
     }
+  });
+})();
+
+// --- Квиз: сбор ответов и сообщение об успехе/ошибке ---
+(function initQuiz() {
+  const form = document.getElementById('quizForm');
+  if (!form) return;
+
+  const status = document.getElementById('quizStatus');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // Собираем выбранные ответы (name → выбранный value)
+    const data = {};
+    form.querySelectorAll('input[type="radio"]:checked').forEach((input) => {
+      data[input.name] = input.value;
+    });
+
+    const contact = form.querySelector('input[name="contact"]').value.trim();
+
+    // Валидация: ответы на все вопросы + контакт
+    const required = ['need', 'design', 'project', 'marketplace'];
+    const missing = required.filter((key) => !data[key]);
+
+    let message = '';
+    let isError = false;
+
+    if (missing.length) {
+      message = 'Пожалуйста, ответьте на все вопросы квиза.';
+      isError = true;
+    } else if (!contact) {
+      message = 'Укажите email или Telegram для расчёта.';
+      isError = true;
+    } else {
+      // Здесь будет POST на /api/leads на этапе 4
+      message = 'Спасибо! Я свяжусь с вами в течение дня с расчётом.';
+      form.reset();
+    }
+
+    status.textContent = message;
+    status.classList.toggle('is-error', isError);
   });
 })();

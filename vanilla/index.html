@@ -40,9 +40,9 @@
         <ul class="header__menu">
           <li class="header__item"><a href="#services" class="header__link">Услуги</a></li>
           <li class="header__item"><a href="#work" class="header__link">Работы</a></li>
+          <li class="header__item"><a href="#quiz" class="header__link">Квиз</a></li>
           <li class="header__item"><a href="#about" class="header__link">Обо мне</a></li>
           <li class="header__item"><a href="#process" class="header__link">Процесс</a></li>
-          <li class="header__item"><a href="#faq" class="header__link">FAQ</a></li>
         </ul>
       </nav>
 
@@ -54,9 +54,9 @@
             <path d="M21.94 4.34L18.66 19.43C18.42 20.42 17.82 20.65 16.99 20.18L12.1 16.64L9.74 18.91C9.48 19.17 9.26 19.39 8.76 19.39L9.11 14.38L18.04 6.37C18.44 6.02 17.95 5.82 17.41 6.17L6.38 13.03L1.55 11.46C0.59 11.16 0.58 10.47 1.76 10.02L20.38 3.14C21.18 2.84 21.87 3.31 21.94 4.34Z" fill="currentColor"/>
           </svg>
         </a>
-        <a href="https://github.com/" class="header__social" target="_blank" rel="noopener" aria-label="GitHub">
+        <a href="https://vk.com/" class="header__social" target="_blank" rel="noopener" aria-label="ВКонтакте">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 0.3C5.4 0.3 0 5.7 0 12.3c0 5.3 3.4 9.8 8.2 11.4.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.4-5.5-6.1 0-1.3.5-2.4 1.3-3.3-.1-.3-.6-1.6.1-3.3 0 0 1.1-.3 3.5 1.3.7-.2 1.4-.3 2.1-.3s1.4.1 2.1.3c2.4-1.6 3.5-1.3 3.5-1.3.7 1.7.2 3 .1 3.3.8.9 1.3 2 1.3 3.3 0 4.7-2.8 5.8-5.5 6.1.4.4.8 1.1.8 2.3v3.4c0 .3.2.7.8.6 4.8-1.6 8.2-6.1 8.2-11.4C24 5.7 18.6 0.3 12 0.3Z" fill="currentColor"/>
+            <path d="M12.4 18.6c-5.9 0-9.3-4-9.4-10.7h2.9c.1 5 2.3 7.1 4 7.6V7.9h2.8v4.3c1.7-.2 3.5-2.2 4.1-4.3h2.8c-.5 2.6-2.4 4.6-3.8 5.4 1.4.7 3.6 2.4 4.4 5.3h-3c-.6-1.9-2.2-3.5-4.5-3.7v3.7h-.3Z" fill="currentColor"/>
           </svg>
         </a>
 
@@ -75,8 +75,8 @@
           </span>
         </button>
 
-        <!-- CTA -->
-        <a href="#contacts" class="btn btn--primary header__cta">Обсудить проект</a>
+        <!-- CTA ведёт на квиз -->
+        <a href="#quiz" class="btn btn--primary header__cta">Обсудить проект</a>
 
         <!-- Бургер -->
         <button class="burger" id="burger" aria-label="Открыть меню">
@@ -91,6 +91,9 @@
   <main>
     <!-- Hero: первый экран -->
     <section class="hero" id="hero">
+      <!-- Фоновое изображение в стиле дизайна/веб-разработки -->
+      <div class="hero__bg" aria-hidden="true"></div>
+
       <div class="container hero__inner">
         <!-- Левая колонка: текст -->
         <div class="hero__content">
@@ -104,7 +107,7 @@
           </p>
           <div class="hero__actions">
             <a href="#work" class="btn btn--primary">Смотреть работы</a>
-            <a href="#services" class="btn btn--ghost">
+            <a href="#quiz" class="btn btn--ghost">
               Услуги
               <span class="btn__arrow" aria-hidden="true">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -131,29 +134,21 @@
           </ul>
         </div>
 
-        <!-- Правая колонка: декоративный блок -->
-        <div class="hero__visual" aria-hidden="true">
-          <div class="hero__browser">
-            <div class="hero__browser-bar">
-              <span class="hero__browser-dot"></span>
-              <span class="hero__browser-dot"></span>
-              <span class="hero__browser-dot"></span>
-              <span class="hero__browser-url">krasavin.dev</span>
-            </div>
-            <div class="hero__browser-content">
-              <div class="hero__browser-line hero__browser-line--title"></div>
-              <div class="hero__browser-line hero__browser-line--text"></div>
-              <div class="hero__browser-line hero__browser-line--text-short"></div>
-              <div class="hero__browser-btns">
-                <span class="hero__browser-btn hero__browser-btn--solid"></span>
-                <span class="hero__browser-btn hero__browser-btn--ghost"></span>
-              </div>
-              <div class="hero__browser-cards">
-                <span class="hero__browser-card"></span>
-                <span class="hero__browser-card"></span>
-                <span class="hero__browser-card"></span>
-              </div>
-            </div>
+        <!-- Правая колонка: превью работ в кругах (по референсу) -->
+        <div class="hero__visual">
+          <!-- Группа: сайты -->
+          <div class="hero__visual-group hero__visual-group--sites" aria-hidden="true">
+            <span class="hero__circle-label">Сайты</span>
+            <span class="hero__circle hero__circle--1"></span>
+            <span class="hero__circle hero__circle--2"></span>
+            <span class="hero__circle hero__circle--3"></span>
+          </div>
+          <!-- Группа: инфографика -->
+          <div class="hero__visual-group hero__visual-group--infographics" aria-hidden="true">
+            <span class="hero__circle-label hero__circle-label--infographic">Инфографика</span>
+            <span class="hero__circle hero__circle--4"></span>
+            <span class="hero__circle hero__circle--5"></span>
+            <span class="hero__circle hero__circle--6"></span>
           </div>
           <!-- Плавающий бейдж -->
           <div class="hero__badge">
@@ -168,6 +163,64 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Квиз / CTA: собирает ТЗ -->
+    <section class="quiz" id="quiz">
+      <div class="container">
+        <div class="quiz__head">
+          <p class="quiz__subtitle">Квиз</p>
+          <h2 class="quiz__title">Пройдите 5 вопросов — получите расчёт за 1 день</h2>
+          <p class="quiz__text">Ответьте на пару вопросов, чтобы я сразу собрал ТЗ и подготовил точный расчёт и коммерческое предложение.</p>
+        </div>
+        <form class="quiz__form" id="quizForm" novalidate>
+          <ol class="quiz__steps">
+            <li class="quiz__step">
+              <p class="quiz__question">1. Что вам нужно?</p>
+              <div class="quiz__options">
+                <label class="quiz__option"><input type="radio" name="need" value="site"> Сайт</label>
+                <label class="quiz__option"><input type="radio" name="need" value="infographic"> Инфографика для маркетплейсов</label>
+                <label class="quiz__option"><input type="radio" name="need" value="both"> И то, и другое</label>
+              </div>
+            </li>
+            <li class="quiz__step">
+              <p class="quiz__question">2. У вас есть дизайн-макет?</p>
+              <div class="quiz__options">
+                <label class="quiz__option"><input type="radio" name="design" value="yes"> Да, есть</label>
+                <label class="quiz__option"><input type="radio" name="design" value="no"> Нет, нужен дизайн</label>
+              </div>
+            </li>
+            <li class="quiz__step">
+              <p class="quiz__question">3. Какой проект вам нужен?</p>
+              <div class="quiz__options">
+                <label class="quiz__option"><input type="radio" name="project" value="landing"> Лендинг</label>
+                <label class="quiz__option"><input type="radio" name="project" value="corp"> Корпоративный сайт</label>
+                <label class="quiz__option"><input type="radio" name="project" value="shop"> Интернет-магазин</label>
+              </div>
+            </li>
+            <li class="quiz__step">
+              <p class="quiz__question">4. Для какой площадки инфографика?</p>
+              <div class="quiz__options">
+                <label class="quiz__option"><input type="radio" name="marketplace" value="ozon"> Озон</label>
+                <label class="quiz__option"><input type="radio" name="marketplace" value="wb"> Wildberries</label>
+                <label class="quiz__option"><input type="radio" name="marketplace" value="both"> Обе</label>
+                <label class="quiz__option"><input type="radio" name="marketplace" value="other"> Другая</label>
+              </div>
+            </li>
+            <li class="quiz__step">
+              <p class="quiz__question">5. Куда отправить расчёт?</p>
+              <div class="quiz__contact">
+                <label class="quiz__field">
+                  <span class="quiz__label">Email или Telegram</span>
+                  <input type="text" name="contact" class="quiz__input" placeholder="@username или email@mail.ru" required>
+                </label>
+              </div>
+            </li>
+          </ol>
+          <button type="submit" class="btn btn--primary quiz__submit">Получить расчёт</button>
+          <p class="quiz__note" id="quizStatus" aria-live="polite"></p>
+        </form>
       </div>
     </section>
   </main>
