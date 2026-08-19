@@ -1,0 +1,815 @@
+/* ============================================
+   КРАСАВИН АЛЕКСАНДР — портфолио
+   Этап 1: Каркас (header + hero)
+   ============================================ */
+
+/* --- Переменные темы (тёмная по умолчанию) --- */
+:root,
+[data-theme="dark"] {
+  /* Фоны */
+  --bg-primary: #0B1220;
+  --bg-secondary: #111B2E;
+  --bg-card: #16213A;
+
+  /* Текст */
+  --text-primary: #E6EDF7;
+  --text-secondary: #9AA9BD;
+  --text-muted: #64748B;
+
+  /* Акценты */
+  --accent: #00D4B4;
+  --accent-hover: #00BFA3;
+  --accent-soft: rgba(0, 212, 180, 0.12);
+
+  /* Кнопки */
+  --btn-primary-text: #0B1220;
+  --btn-ghost-border: rgba(230, 237, 247, 0.25);
+
+  /* Границы */
+  --border-color: rgba(230, 237, 247, 0.1);
+
+  /* Состояния */
+  --shadow-color: rgba(0, 0, 0, 0.4);
+  --hover-bg: rgba(255, 255, 255, 0.04);
+  --active-bg: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] {
+  /* Фоны */
+  --bg-primary: #F6F9FC;
+  --bg-secondary: #EDF2F8;
+  --bg-card: #FFFFFF;
+
+  /* Текст */
+  --text-primary: #0B1220;
+  --text-secondary: #47566B;
+  --text-muted: #64748B;
+
+  /* Акценты */
+  --accent: #00BFA3;
+  --accent-hover: #009E87;
+  --accent-soft: rgba(0, 191, 163, 0.1);
+
+  /* Кнопки */
+  --btn-primary-text: #FFFFFF;
+  --btn-ghost-border: rgba(11, 18, 32, 0.25);
+
+  /* Границы */
+  --border-color: rgba(11, 18, 32, 0.1);
+
+  /* Состояния */
+  --shadow-color: rgba(11, 18, 32, 0.08);
+  --hover-bg: rgba(11, 18, 32, 0.04);
+  --active-bg: rgba(11, 18, 32, 0.08);
+}
+
+/* --- Базовые стили --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px; /* Компенсация липкой шапки */
+}
+
+body {
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+/* --- Контейнер (12-колоночная сетка) --- */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* --- Кнопки --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.btn--primary {
+  background-color: var(--accent);
+  color: var(--btn-primary-text);
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.btn--primary:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px var(--shadow-color);
+}
+
+.btn--primary:active {
+  transform: translateY(0);
+}
+
+.btn--ghost {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--btn-ghost-border);
+}
+
+.btn--ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Шапка --- */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: transparent;
+  backdrop-filter: blur(12px);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Липкая шапка после скролла */
+.header.is-scrolled {
+  background-color: var(--bg-primary);
+  box-shadow: 0 1px 0 var(--border-color);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 72px;
+}
+
+/* Логотип */
+.header__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.header__logo-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  transition: background-color 0.25s ease;
+}
+
+.header__logo:hover .header__logo-icon {
+  background: var(--accent);
+  color: var(--btn-primary-text);
+}
+
+.header__logo-text {
+  font-family: "Unbounded", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.header__logo-accent {
+  color: var(--accent);
+}
+
+/* Навигация */
+.header__nav {
+  display: flex;
+}
+
+.header__menu {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.header__item {
+  position: relative;
+}
+
+.header__link {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-secondary, var(--text-muted));
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.header__link:hover {
+  color: var(--text-primary);
+  background-color: var(--hover-bg);
+}
+
+.header__link:active {
+  background-color: var(--active-bg);
+}
+
+/* Правая часть шапки */
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* Соцсети */
+.header__social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  color: var(--text-secondary, var(--text-muted));
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.header__social:hover {
+  color: var(--accent);
+  background-color: var(--hover-bg);
+}
+
+/* Переключатель темы */
+.theme-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  color: var(--text-secondary, var(--text-muted));
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--accent);
+  background-color: var(--hover-bg);
+}
+
+/* Солнце/луна: показываем в зависимости от темы */
+.theme-toggle__sun,
+.theme-toggle__moon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+[data-theme="dark"] .theme-toggle__sun {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(90deg) scale(0.5);
+  pointer-events: none;
+}
+
+[data-theme="dark"] .theme-toggle__moon {
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(0deg) scale(1);
+}
+
+[data-theme="light"] .theme-toggle__sun {
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(0deg) scale(1);
+}
+
+[data-theme="light"] .theme-toggle__moon {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(-90deg) scale(0.5);
+  pointer-events: none;
+}
+
+/* CTA в шапке */
+.header__cta {
+  height: 40px;
+  padding: 0 20px;
+  font-size: 14px;
+}
+
+/* Бургер (скрыт на десктопе) */
+.burger {
+  display: none;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.burger:hover {
+  background-color: var(--hover-bg);
+}
+
+.burger__line {
+  display: block;
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: var(--text-primary);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Бургер в состоянии "открыто" (крестик через трансформацию линий) */
+.burger.is-open .burger__line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.burger.is-open .burger__line:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.is-open .burger__line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* --- Hero --- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 0 64px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 600px 400px at 85% 20%, var(--accent-soft), transparent),
+    radial-gradient(ellipse 500px 350px at 10% 90%, var(--accent-soft), transparent);
+}
+
+.hero__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 64px;
+}
+
+/* Контент героя */
+.hero__subtitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+}
+
+.hero__subtitle::before {
+  content: "";
+  width: 32px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--accent);
+}
+
+.hero__title {
+  font-family: "Unbounded", sans-serif;
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+}
+
+.hero__accent {
+  background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.hero__text {
+  max-width: 520px;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--text-secondary, var(--text-muted));
+  margin-bottom: 32px;
+}
+
+.hero__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+/* Мини-метрики */
+.hero__stats {
+  display: flex;
+  gap: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border-color);
+}
+
+.hero__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hero__stat-value {
+  font-family: "Unbounded", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.hero__stat-label {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* Визуальная часть: браузер-макет */
+.hero__visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero__browser {
+  width: 100%;
+  max-width: 480px;
+  border-radius: 16px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 24px 64px var(--shadow-color);
+  overflow: hidden;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.hero__browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 16px;
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.hero__browser-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #EF4444;
+}
+
+.hero__browser-dot:nth-child(2) {
+  background-color: #F59E0B;
+}
+
+.hero__browser-dot:nth-child(3) {
+  background-color: #10B981;
+}
+
+.hero__browser-url {
+  flex: 1;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  background-color: var(--bg-primary);
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+
+.hero__browser-content {
+  padding: 32px 24px;
+}
+
+.hero__browser-line {
+  height: 16px;
+  border-radius: 4px;
+  background-color: var(--hover-bg);
+  margin-bottom: 12px;
+}
+
+.hero__browser-line--title {
+  width: 65%;
+  height: 24px;
+  background-color: var(--accent-soft);
+}
+
+.hero__browser-line--text {
+  width: 90%;
+  height: 10px;
+}
+
+.hero__browser-line--text-short {
+  width: 70%;
+  height: 10px;
+}
+
+.hero__browser-btns {
+  display: flex;
+  gap: 12px;
+  margin: 24px 0 32px;
+}
+
+.hero__browser-btn {
+  height: 32px;
+  border-radius: 8px;
+}
+
+.hero__browser-btn--solid {
+  width: 120px;
+  background-color: var(--accent);
+}
+
+.hero__browser-btn--ghost {
+  width: 80px;
+  border: 1px solid var(--btn-ghost-border);
+}
+
+.hero__browser-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.hero__browser-card {
+  height: 56px;
+  border-radius: 8px;
+  background-color: var(--hover-bg);
+}
+
+/* Плавающий бейдж */
+.hero__badge {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px var(--shadow-color);
+  bottom: 32px;
+  left: -16px;
+}
+
+.hero__badge-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background-color: var(--accent-soft);
+  color: var(--accent);
+}
+
+.hero__badge-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.hero__badge-caption {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.2;
+}
+
+/* --- Кнопка "наверх" --- */
+.to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 90;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  box-shadow: 0 4px 16px var(--shadow-color);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease,
+              background-color 0.2s ease, color 0.2s ease;
+}
+
+.to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.to-top:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.to-top__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Адаптивность (mobile-first) --- */
+
+/* Планшет (576–991px) */
+@media (max-width: 991px) {
+  .container {
+    padding: 0 20px;
+  }
+
+  .hero__inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .hero__visual {
+    order: -1;
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .hero__title {
+    font-size: 44px;
+  }
+
+  /* Мобильное меню */
+  .header__nav {
+    position: fixed;
+    top: 72px;
+    left: 0;
+    right: 0;
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+    padding: 16px 20px 24px;
+    transform: translateY(-16px);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .header__nav.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .header__menu {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+  }
+
+  .header__link {
+    display: block;
+    padding: 12px 16px;
+    font-size: 16px;
+  }
+
+  .burger {
+    display: inline-flex;
+  }
+
+  .header__actions {
+    gap: 4px;
+  }
+
+  .header__cta {
+    display: none; /* Прячем CTA в шапке на мобильных (есть в hero) */
+  }
+}
+
+/* Мобильный (320–575px) */
+@media (max-width: 575px) {
+  .hero {
+    padding: 96px 0 48px;
+  }
+
+  .hero__title {
+    font-size: 36px;
+  }
+
+  .hero__text {
+    font-size: 16px;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+  }
+
+  .hero__stats {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .hero__badge {
+    left: 0;
+  }
+
+  .header__social {
+    width: 36px;
+    height: 36px;
+  }
+
+  .theme-toggle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .header__logo-text {
+    font-size: 14px;
+  }
+}
+
+/* Небольшие поддержки для hover только на десктопе */
+@media (hover: hover) {
+  .header__link:hover,
+  .header__social:hover,
+  .theme-toggle:hover {
+    /* уже задано выше */
+  }
+}

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Красавин Александр — веб-разработчик, сайты под заявки</title>
+  <meta name="description" content="Делаю красивые сайты, которые приносят заявки, и инфографику для маркетплейсов, повышающую CTR и продажи.">
+  <meta name="keywords" content="веб-разработчик, создание сайтов, лендинг, инфографика, маркетплейсы, заявки">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://krasavin.ru/">
+  <meta property="og:title" content="Красавин Александр — веб-разработчик">
+  <meta property="og:description" content="Красивые сайты, которые приносят заявки. Инфографика для маркетплейсов, повышающая CTR.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://krasavin.ru/">
+  <meta property="og:image" content="https://krasavin.ru/og-image.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page">
+
+  <!-- Шапка -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <!-- Логотип -->
+      <a href="#hero" class="header__logo" aria-label="На главную">
+        <span class="header__logo-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="24" height="24" rx="6" stroke="currentColor" stroke-width="2"/>
+            <path d="M9 18L14 10L19 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="14" cy="7" r="1.5" fill="currentColor"/>
+          </svg>
+        </span>
+        <span class="header__logo-text">Красавин<span class="header__logo-accent">.dev</span></span>
+      </a>
+
+      <!-- Меню -->
+      <nav class="header__nav" id="nav" aria-label="Основная навигация">
+        <ul class="header__menu">
+          <li class="header__item"><a href="#services" class="header__link">Услуги</a></li>
+          <li class="header__item"><a href="#work" class="header__link">Работы</a></li>
+          <li class="header__item"><a href="#about" class="header__link">Обо мне</a></li>
+          <li class="header__item"><a href="#process" class="header__link">Процесс</a></li>
+          <li class="header__item"><a href="#faq" class="header__link">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <!-- Правая часть: соцсети, переключатель темы, CTA -->
+      <div class="header__actions">
+        <!-- Соцсети -->
+        <a href="https://t.me/" class="header__social" target="_blank" rel="noopener" aria-label="Telegram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21.94 4.34L18.66 19.43C18.42 20.42 17.82 20.65 16.99 20.18L12.1 16.64L9.74 18.91C9.48 19.17 9.26 19.39 8.76 19.39L9.11 14.38L18.04 6.37C18.44 6.02 17.95 5.82 17.41 6.17L6.38 13.03L1.55 11.46C0.59 11.16 0.58 10.47 1.76 10.02L20.38 3.14C21.18 2.84 21.87 3.31 21.94 4.34Z" fill="currentColor"/>
+          </svg>
+        </a>
+        <a href="https://github.com/" class="header__social" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 0.3C5.4 0.3 0 5.7 0 12.3c0 5.3 3.4 9.8 8.2 11.4.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.4-5.5-6.1 0-1.3.5-2.4 1.3-3.3-.1-.3-.6-1.6.1-3.3 0 0 1.1-.3 3.5 1.3.7-.2 1.4-.3 2.1-.3s1.4.1 2.1.3c2.4-1.6 3.5-1.3 3.5-1.3.7 1.7.2 3 .1 3.3.8.9 1.3 2 1.3 3.3 0 4.7-2.8 5.8-5.5 6.1.4.4.8 1.1.8 2.3v3.4c0 .3.2.7.8.6 4.8-1.6 8.2-6.1 8.2-11.4C24 5.7 18.6 0.3 12 0.3Z" fill="currentColor"/>
+          </svg>
+        </a>
+
+        <!-- Переключатель темы -->
+        <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
+          <span class="theme-toggle__sun" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 2V4.5M12 19.5V22M2 12H4.5M19.5 12H22M4.9 4.9L6.7 6.7M17.3 17.3L19.1 19.1M4.9 19.1L6.7 17.3M17.3 6.7L19.1 4.9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="theme-toggle__moon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3 6.5 6.5 0 0 0 21 12.8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </button>
+
+        <!-- CTA -->
+        <a href="#contacts" class="btn btn--primary header__cta">Обсудить проект</a>
+
+        <!-- Бургер -->
+        <button class="burger" id="burger" aria-label="Открыть меню">
+          <span class="burger__line"></span>
+          <span class="burger__line"></span>
+          <span class="burger__line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero: первый экран -->
+    <section class="hero" id="hero">
+      <div class="container hero__inner">
+        <!-- Левая колонка: текст -->
+        <div class="hero__content">
+          <p class="hero__subtitle">Веб-разработчик · Дизайнер · Верстальщик</p>
+          <h1 class="hero__title">
+            Сайты, которые<br>приносят <span class="hero__accent">заявки</span>
+          </h1>
+          <p class="hero__text">
+            Красавин Александр — создаю красивые и быстрые лендинги и корпоративные сайты,
+            которые продают за вас. Плюс инфографика для маркетплейсов, повышающая CTR и конверсию.
+          </p>
+          <div class="hero__actions">
+            <a href="#work" class="btn btn--primary">Смотреть работы</a>
+            <a href="#services" class="btn btn--ghost">
+              Услуги
+              <span class="btn__arrow" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 3V13M8 13L4 9M8 13L12 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </a>
+          </div>
+
+          <!-- Мини-метрики -->
+          <ul class="hero__stats">
+            <li class="hero__stat">
+              <span class="hero__stat-value">10+</span>
+              <span class="hero__stat-label">проектов запущено</span>
+            </li>
+            <li class="hero__stat">
+              <span class="hero__stat-value">+38%</span>
+              <span class="hero__stat-label">средний рост заявок</span>
+            </li>
+            <li class="hero__stat">
+              <span class="hero__stat-value">2.5×</span>
+              <span class="hero__stat-label">рост CTR у инфографики</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Правая колонка: декоративный блок -->
+        <div class="hero__visual" aria-hidden="true">
+          <div class="hero__browser">
+            <div class="hero__browser-bar">
+              <span class="hero__browser-dot"></span>
+              <span class="hero__browser-dot"></span>
+              <span class="hero__browser-dot"></span>
+              <span class="hero__browser-url">krasavin.dev</span>
+            </div>
+            <div class="hero__browser-content">
+              <div class="hero__browser-line hero__browser-line--title"></div>
+              <div class="hero__browser-line hero__browser-line--text"></div>
+              <div class="hero__browser-line hero__browser-line--text-short"></div>
+              <div class="hero__browser-btns">
+                <span class="hero__browser-btn hero__browser-btn--solid"></span>
+                <span class="hero__browser-btn hero__browser-btn--ghost"></span>
+              </div>
+              <div class="hero__browser-cards">
+                <span class="hero__browser-card"></span>
+                <span class="hero__browser-card"></span>
+                <span class="hero__browser-card"></span>
+              </div>
+            </div>
+          </div>
+          <!-- Плавающий бейдж -->
+          <div class="hero__badge">
+            <span class="hero__badge-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div class="hero__badge-text">
+              <span class="hero__badge-title">+38% заявок</span>
+              <span class="hero__badge-caption">после редизайна</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Кнопка "наверх" -->
+  <button class="to-top" id="toTop" aria-label="Наверх">
+    <span class="to-top__arrow" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 13V3M8 3L4 7M8 3L12 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+  </button>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
