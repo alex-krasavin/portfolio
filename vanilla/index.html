@@ -4,6 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Красавин Александр — веб-разработчик, сайты под заявки</title>
+  <!-- Установка темы до первой отрисовки (правило 6.5: без мерцания/FOUC) -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        var system = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', saved || system);
+      } catch (e) {
+        /* localStorage недоступен — оставляем тему из HTML (dark) */
+      }
+    })();
+  </script>
   <meta name="description" content="Делаю красивые сайты, которые приносят заявки, и инфографику для маркетплейсов, повышающую CTR и продажи.">
   <meta name="keywords" content="веб-разработчик, создание сайтов, лендинг, инфографика, маркетплейсы, заявки">
   <meta name="robots" content="index, follow">
@@ -42,6 +54,7 @@
           <li class="header__item"><a href="#work" class="header__link">Работы</a></li>
           <li class="header__item"><a href="#why" class="header__link">Почему я</a></li>
           <li class="header__item"><a href="#process" class="header__link">Как я работаю</a></li>
+          <li class="header__item"><a href="#reviews" class="header__link">Отзывы</a></li>
         </ul>
       </nav>
 
@@ -236,6 +249,16 @@
                 <input type="text" name="telegram" class="quiz__input" placeholder="@username" autocomplete="off">
               </label>
               <p class="quiz__hint">Заполните хотя бы одно поле — email или Telegram.</p>
+
+              <!-- Описание пожеланий (необязательное поле) -->
+              <label class="quiz__field quiz__field--textarea">
+                <span class="quiz__label">
+                  Опишите ваши пожелания
+                  <span class="quiz__label-optional">(необязательно)</span>
+                </span>
+                <textarea name="message" class="quiz__textarea" rows="4" maxlength="500" placeholder="Например: нужен лендинг под ключ, уже есть макет, интересует инфографика для WB..."></textarea>
+                <span class="quiz__textarea-counter" id="quizMessageCounter">0 / 500</span>
+              </label>
             </div>
             <label class="quiz__consent">
               <input type="checkbox" name="consent" value="1">
@@ -246,15 +269,501 @@
           <div class="quiz__controls">
             <button type="button" class="btn btn--ghost quiz__back" id="quizBack" hidden>Назад</button>
             <button type="button" class="btn btn--primary quiz__next" id="quizNext">Далее</button>
-            <button type="submit" class="btn btn--primary quiz__submit" id="quizSubmit" hidden>Получить расчёт</button>
+            <button type="submit" class="btn btn--primary quiz__submit" id="quizSubmit" disabled>Получить расчёт</button>
           </div>
           <p class="quiz__note" id="quizStatus" aria-live="polite"></p>
         </form>
       </div>
     </section>
+
+    <!-- Услуги: что делаю и для кого -->
+    <section class="services" id="services" aria-labelledby="servicesTitle">
+      <div class="container">
+        <div class="services__head">
+          <p class="services__subtitle">Услуги</p>
+          <h2 class="services__title" id="servicesTitle">Чем могу помочь</h2>
+          <p class="services__text">Беру задачи под сайты и карточки товаров — от идеи до запуска, без посредников и лишних согласований.</p>
+        </div>
+
+        <div class="services__grid">
+          <!-- Карточка 1: Лендинги -->
+          <article class="services__card">
+            <span class="services__icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="4" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M3 9H21" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M7 13H13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <h3 class="services__card-title">Лендинги под ключ</h3>
+            <p class="services__card-text">Одна страница, которая продаёт: сильный оффер, форма заявки, быстрая загрузка.</p>
+            <ul class="services__features">
+              <li class="services__feature">Дизайн и вёрстка</li>
+              <li class="services__feature">Адаптив 320–2560px</li>
+              <li class="services__feature">SEO-разметка</li>
+            </ul>
+            <a href="#quiz" class="services__link">
+              Обсудить проект
+              <span class="services__link-arrow" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </a>
+          </article>
+
+          <!-- Карточка 2: Корпоративные сайты -->
+          <article class="services__card">
+            <span class="services__icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="3" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.8"/>
+                <rect x="13" y="3" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.8"/>
+                <rect x="3" y="13" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.8"/>
+                <rect x="13" y="13" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.8"/>
+              </svg>
+            </span>
+            <h3 class="services__card-title">Корпоративные сайты</h3>
+            <p class="services__card-text">Многостраничный сайт для компании: услуги, портфолио, команда, блог.</p>
+            <ul class="services__features">
+              <li class="services__feature">Продуманная структура</li>
+              <li class="services__feature">Простая админка</li>
+              <li class="services__feature">Интеграция с CRM</li>
+            </ul>
+            <a href="#quiz" class="services__link">
+              Обсудить проект
+              <span class="services__link-arrow" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </a>
+          </article>
+
+          <!-- Карточка 3: Редизайн и доработка -->
+          <article class="services__card">
+            <span class="services__icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 12a8 8 0 0 1 13.66-5.66M20 12a8 8 0 0 1-13.66 5.66" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M17 3v4h-4M7 21v-4h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <h3 class="services__card-title">Редизайн и доработка</h3>
+            <p class="services__card-text">Обновляю старый сайт: свежий дизайн, актуальный стек, ускорение загрузки.</p>
+            <ul class="services__features">
+              <li class="services__feature">Аудит текущего сайта</li>
+              <li class="services__feature">Пиксель-перфект вёрстка</li>
+              <li class="services__feature">Рост конверсии</li>
+            </ul>
+            <a href="#quiz" class="services__link">
+              Обсудить проект
+              <span class="services__link-arrow" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </a>
+          </article>
+
+          <!-- Карточка 4: Инфографика для маркетплейсов -->
+          <article class="services__card">
+            <span class="services__icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M7 15l3-4 3 3 4-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <h3 class="services__card-title">Инфографика для маркетплейсов</h3>
+            <p class="services__card-text">Карточки товаров для Ozon и Wildberries, которые повышают CTR и продажи.</p>
+            <ul class="services__features">
+              <li class="services__feature">Инфографика 1-го экрана</li>
+              <li class="services__feature">А/Б-варианты обложек</li>
+              <li class="services__feature">Рост CTR до 2.5×</li>
+            </ul>
+            <a href="#quiz" class="services__link">
+              Обсудить проект
+              <span class="services__link-arrow" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Портфолио: работы -->
+    <section class="work" id="work" aria-labelledby="workTitle">
+      <div class="container">
+        <div class="work__head">
+          <p class="work__subtitle">Работы</p>
+          <h2 class="work__title" id="workTitle">Последние проекты</h2>
+          <p class="work__text">Сайты и инфографика, которые уже приносят заявки и продажи клиентам.</p>
+        </div>
+
+        <div class="work__grid">
+          <!-- Проект 1 -->
+          <article class="work__card">
+            <div class="work__preview" aria-hidden="true">
+              <span class="work__preview-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="3" y="4" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/>
+                  <path d="M3 9H21" stroke="currentColor" stroke-width="1.6"/>
+                </svg>
+              </span>
+            </div>
+            <div class="work__body">
+              <span class="work__tag">Лендинг</span>
+              <h3 class="work__card-title">Студия дизайна интерьера</h3>
+              <p class="work__card-text">Одностраничник с квизом и портфолио проектов, рост заявок на 42%.</p>
+              <a href="#quiz" class="work__link">
+                Открыть кейс
+                <span class="work__link-arrow" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Проект 2 -->
+          <article class="work__card">
+            <div class="work__preview" aria-hidden="true">
+              <span class="work__preview-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="3" y="3" width="8" height="8" rx="1.4" stroke="currentColor" stroke-width="1.6"/>
+                  <rect x="13" y="3" width="8" height="8" rx="1.4" stroke="currentColor" stroke-width="1.6"/>
+                  <rect x="3" y="13" width="8" height="8" rx="1.4" stroke="currentColor" stroke-width="1.6"/>
+                  <rect x="13" y="13" width="8" height="8" rx="1.4" stroke="currentColor" stroke-width="1.6"/>
+                </svg>
+              </span>
+            </div>
+            <div class="work__body">
+              <span class="work__tag">Корпоративный сайт</span>
+              <h3 class="work__card-title">Юридическая компания</h3>
+              <p class="work__card-text">Многостраничный сайт с блогом и формами заявок по каждой услуге.</p>
+              <a href="#quiz" class="work__link">
+                Открыть кейс
+                <span class="work__link-arrow" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Проект 3 -->
+          <article class="work__card">
+            <div class="work__preview" aria-hidden="true">
+              <span class="work__preview-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.6"/>
+                  <path d="M7 15l3-4 3 3 4-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </div>
+            <div class="work__body">
+              <span class="work__tag">Инфографика WB</span>
+              <h3 class="work__card-title">Карточки товаров: косметика</h3>
+              <p class="work__card-text">Обновление инфографики 12 карточек, рост CTR в 2.3 раза за месяц.</p>
+              <a href="#quiz" class="work__link">
+                Открыть кейс
+                <span class="work__link-arrow" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Проект 4 -->
+          <article class="work__card">
+            <div class="work__preview" aria-hidden="true">
+              <span class="work__preview-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 12a8 8 0 0 1 13.66-5.66M20 12a8 8 0 0 1-13.66 5.66" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                  <path d="M17 3v4h-4M7 21v-4h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </div>
+            <div class="work__body">
+              <span class="work__tag">Редизайн</span>
+              <h3 class="work__card-title">Сервис доставки цветов</h3>
+              <p class="work__card-text">Обновили дизайн и скорость загрузки, конверсия выросла на 31%.</p>
+              <a href="#quiz" class="work__link">
+                Открыть кейс
+                <span class="work__link-arrow" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Проект 5 -->
+          <article class="work__card">
+            <div class="work__preview" aria-hidden="true">
+              <span class="work__preview-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="3" y="4" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/>
+                  <path d="M3 9H21" stroke="currentColor" stroke-width="1.6"/>
+                  <path d="M7 13H13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </div>
+            <div class="work__body">
+              <span class="work__tag">Лендинг</span>
+              <h3 class="work__card-title">Онлайн-школа английского</h3>
+              <p class="work__card-text">Лендинг с квизом-подбором курса, +55% заявок на пробный урок.</p>
+              <a href="#quiz" class="work__link">
+                Открыть кейс
+                <span class="work__link-arrow" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Проект 6 -->
+          <article class="work__card">
+            <div class="work__preview" aria-hidden="true">
+              <span class="work__preview-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.6"/>
+                  <path d="M7 15l3-4 3 3 4-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </div>
+            <div class="work__body">
+              <span class="work__tag">Инфографика Ozon</span>
+              <h3 class="work__card-title">Карточки товаров: электроника</h3>
+              <p class="work__card-text">Серия обложек с А/Б-тестом, победивший вариант поднял CTR на 68%.</p>
+              <a href="#quiz" class="work__link">
+                Открыть кейс
+                <span class="work__link-arrow" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Почему я: аргументы доверия -->
+    <section class="why" id="why" aria-labelledby="whyTitle">
+      <div class="container why__inner">
+        <div class="why__content">
+          <p class="why__subtitle">Почему я</p>
+          <h2 class="why__title" id="whyTitle">Работаю без посредников — и это выгодно вам</h2>
+          <p class="why__text">
+            Я сам дизайню, верстаю и настраиваю сайты — без студий, менеджеров и переплаты за
+            «прослойку». Вы общаетесь напрямую с исполнителем на всех этапах.
+          </p>
+
+          <ul class="why__list">
+            <li class="why__item">
+              <span class="why__item-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <div>
+                <h3 class="why__item-title">Прямая коммуникация</h3>
+                <p class="why__item-text">Без цепочки менеджеров — все вопросы решаем напрямую в переписке.</p>
+              </div>
+            </li>
+            <li class="why__item">
+              <span class="why__item-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <div>
+                <h3 class="why__item-title">Фиксированные сроки</h3>
+                <p class="why__item-text">Согласовываю этапы и даты заранее, показываю прогресс на каждом шаге.</p>
+              </div>
+            </li>
+            <li class="why__item">
+              <span class="why__item-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <div>
+                <h3 class="why__item-title">Гарантия и поддержка</h3>
+                <p class="why__item-text">После запуска на связи: правки и мелкие доработки — бесплатно 14 дней.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Цифры-факты -->
+        <div class="why__stats">
+          <div class="why__stat-card">
+            <span class="why__stat-value">5+</span>
+            <span class="why__stat-label">лет в веб-разработке</span>
+          </div>
+          <div class="why__stat-card">
+            <span class="why__stat-value">40+</span>
+            <span class="why__stat-label">завершённых проектов</span>
+          </div>
+          <div class="why__stat-card">
+            <span class="why__stat-value">98%</span>
+            <span class="why__stat-label">клиентов довольны результатом</span>
+          </div>
+          <div class="why__stat-card">
+            <span class="why__stat-value">14 дней</span>
+            <span class="why__stat-label">бесплатной поддержки</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Как я работаю: этапы процесса -->
+    <section class="process" id="process" aria-labelledby="processTitle">
+      <div class="container">
+        <div class="process__head">
+          <p class="process__subtitle">Как я работаю</p>
+          <h2 class="process__title" id="processTitle">Понятный процесс от заявки до запуска</h2>
+          <p class="process__text">Каждый этап согласовываем до перехода к следующему — без сюрпризов и переделок.</p>
+        </div>
+
+        <ol class="process__list">
+          <li class="process__step">
+            <span class="process__step-num">01</span>
+            <h3 class="process__step-title">Бриф и расчёт</h3>
+            <p class="process__step-text">Проходите квиз или пишете напрямую — уточняю задачу и присылаю расчёт.</p>
+          </li>
+          <li class="process__step">
+            <span class="process__step-num">02</span>
+            <h3 class="process__step-title">Дизайн-концепт</h3>
+            <p class="process__step-text">Готовлю макет ключевых экранов, согласовываем стиль и структуру.</p>
+          </li>
+          <li class="process__step">
+            <span class="process__step-num">03</span>
+            <h3 class="process__step-title">Вёрстка и функционал</h3>
+            <p class="process__step-text">Собираю сайт: адаптив, анимации, формы — показываю промежуточные результаты.</p>
+          </li>
+          <li class="process__step">
+            <span class="process__step-num">04</span>
+            <h3 class="process__step-title">Запуск и поддержка</h3>
+            <p class="process__step-text">Тестируем, публикуем на хостинге, остаюсь на связи для правок.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Отзывы -->
+    <section class="reviews" id="reviews" aria-labelledby="reviewsTitle">
+      <div class="container">
+        <div class="reviews__head">
+          <p class="reviews__subtitle">Отзывы</p>
+          <h2 class="reviews__title" id="reviewsTitle">Что говорят клиенты</h2>
+        </div>
+
+        <div class="reviews__grid">
+          <article class="reviews__card">
+            <p class="reviews__text">«Сделал лендинг за две недели, заявки пошли уже в первый месяц. Всегда на связи, объяснял каждый шаг».</p>
+            <div class="reviews__author">
+              <span class="reviews__avatar" aria-hidden="true">ЕС</span>
+              <div>
+                <span class="reviews__name">Елена Соколова</span>
+                <span class="reviews__role">Студия дизайна интерьера</span>
+              </div>
+            </div>
+          </article>
+          <article class="reviews__card">
+            <p class="reviews__text">«Обновили инфографику карточек на Wildberries — CTR ощутимо выросла уже за первую неделю. Рекомендую».</p>
+            <div class="reviews__author">
+              <span class="reviews__avatar" aria-hidden="true">ДК</span>
+              <div>
+                <span class="reviews__name">Дмитрий Ковалёв</span>
+                <span class="reviews__role">Продавец на WB</span>
+              </div>
+            </div>
+          </article>
+          <article class="reviews__card">
+            <p class="reviews__text">«Приятно работать с человеком, который сам и дизайнит, и верстает — не нужно объяснять одно и то же дважды».</p>
+            <div class="reviews__author">
+              <span class="reviews__avatar" aria-hidden="true">МП</span>
+              <div>
+                <span class="reviews__name">Мария Петрова</span>
+                <span class="reviews__role">Онлайн-школа английского</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
   </main>
 
+  <!-- Подвал -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="#hero" class="footer__logo" aria-label="На главную">
+          <span class="footer__logo-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="2" width="24" height="24" rx="6" stroke="currentColor" stroke-width="2"/>
+              <path d="M9 18L14 10L19 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="14" cy="7" r="1.5" fill="currentColor"/>
+            </svg>
+          </span>
+          <span class="footer__logo-text">Красавин<span class="footer__logo-accent">.dev</span></span>
+        </a>
+        <p class="footer__desc">Сайты и инфографика для маркетплейсов, которые приносят заявки и продажи.</p>
+      </div>
+
+      <nav class="footer__nav" aria-label="Навигация по сайту">
+        <span class="footer__nav-title">Разделы</span>
+        <a href="#services" class="footer__link">Услуги</a>
+        <a href="#work" class="footer__link">Работы</a>
+        <a href="#why" class="footer__link">Почему я</a>
+        <a href="#process" class="footer__link">Как я работаю</a>
+        <a href="#reviews" class="footer__link">Отзывы</a>
+      </nav>
+
+      <div class="footer__contacts">
+        <span class="footer__nav-title">Контакты</span>
+        <a href="mailto:hello@krasavin.ru" class="footer__link">hello@krasavin.ru</a>
+        <a href="https://t.me/" class="footer__link" target="_blank" rel="noopener">Telegram</a>
+        <a href="https://vk.com/" class="footer__link" target="_blank" rel="noopener">ВКонтакте</a>
+      </div>
+
+      <div class="footer__legal">
+        <span class="footer__nav-title">Информация</span>
+        <a href="privacy.html" class="footer__link">Политика конфиденциальности</a>
+        <span class="footer__requisites">Красавин Александр Сергеевич · Самозанятый · ИНН 000000000000</span>
+      </div>
+    </div>
+
+    <div class="container footer__bottom">
+      <p class="footer__copy">© <span id="footerYear">2026</span> Красавин Александр. Все права защищены.</p>
+    </div>
+  </footer>
+
+  <!-- Куки-баннер -->
+  <div class="cookie" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Уведомление об использовании cookie" hidden>
+    <div class="cookie__inner">
+      <p class="cookie__text">
+        Использую файлы cookie для улучшения работы сайта. Продолжая пользоваться сайтом, вы соглашаетесь с
+        <a href="privacy.html" class="cookie__link">политикой конфиденциальности</a>.
+      </p>
+      <button type="button" class="btn btn--primary cookie__accept" id="cookieAccept">Принять</button>
+    </div>
+  </div>
+
   <!-- Кнопка "наверх" -->
+
   <button class="to-top" id="toTop" aria-label="Наверх">
     <span class="to-top__arrow" aria-hidden="true">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
