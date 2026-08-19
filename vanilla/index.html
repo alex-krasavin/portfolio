@@ -40,9 +40,8 @@
         <ul class="header__menu">
           <li class="header__item"><a href="#services" class="header__link">Услуги</a></li>
           <li class="header__item"><a href="#work" class="header__link">Работы</a></li>
-          <li class="header__item"><a href="#quiz" class="header__link">Квиз</a></li>
-          <li class="header__item"><a href="#about" class="header__link">Обо мне</a></li>
-          <li class="header__item"><a href="#process" class="header__link">Процесс</a></li>
+          <li class="header__item"><a href="#why" class="header__link">Почему я</a></li>
+          <li class="header__item"><a href="#process" class="header__link">Как я работаю</a></li>
         </ul>
       </nav>
 
@@ -137,18 +136,18 @@
         <!-- Правая колонка: превью работ в кругах (по референсу) -->
         <div class="hero__visual">
           <!-- Группа: сайты -->
-          <div class="hero__visual-group hero__visual-group--sites" aria-hidden="true">
+          <div class="hero__visual-group hero__visual-group--sites">
             <span class="hero__circle-label">Сайты</span>
-            <span class="hero__circle hero__circle--1"></span>
-            <span class="hero__circle hero__circle--2"></span>
-            <span class="hero__circle hero__circle--3"></span>
+            <a href="#work" class="hero__circle hero__circle--1 hero__circle--link" aria-label="Смотреть работу: сайт"></a>
+            <a href="#work" class="hero__circle hero__circle--2 hero__circle--link" aria-label="Смотреть работу: сайт"></a>
+            <a href="#work" class="hero__circle hero__circle--3 hero__circle--link" aria-label="Смотреть работу: сайт"></a>
           </div>
           <!-- Группа: инфографика -->
-          <div class="hero__visual-group hero__visual-group--infographics" aria-hidden="true">
+          <div class="hero__visual-group hero__visual-group--infographics">
             <span class="hero__circle-label hero__circle-label--infographic">Инфографика</span>
-            <span class="hero__circle hero__circle--4"></span>
-            <span class="hero__circle hero__circle--5"></span>
-            <span class="hero__circle hero__circle--6"></span>
+            <a href="#work" class="hero__circle hero__circle--4 hero__circle--link" aria-label="Смотреть работу: инфографика"></a>
+            <a href="#work" class="hero__circle hero__circle--5 hero__circle--link" aria-label="Смотреть работу: инфографика"></a>
+            <a href="#work" class="hero__circle hero__circle--6 hero__circle--link" aria-label="Смотреть работу: инфографика"></a>
           </div>
           <!-- Плавающий бейдж -->
           <div class="hero__badge">
@@ -166,59 +165,89 @@
       </div>
     </section>
 
-    <!-- Квиз / CTA: собирает ТЗ -->
+    <!-- Квиз / CTA: собирает ТЗ (поэтапный, с прогресс-баром и ветвлением) -->
     <section class="quiz" id="quiz">
       <div class="container">
         <div class="quiz__head">
           <p class="quiz__subtitle">Квиз</p>
-          <h2 class="quiz__title">Пройдите 5 вопросов — получите расчёт за 1 день</h2>
-          <p class="quiz__text">Ответьте на пару вопросов, чтобы я сразу собрал ТЗ и подготовил точный расчёт и коммерческое предложение.</p>
+          <h2 class="quiz__title">Пройдите пару вопросов — получите расчёт за 1 день</h2>
+          <p class="quiz__text">Отвечайте по одному вопросу. Я подберу вопросы под вашу задачу и подготовлю точный расчёт и коммерческое предложение.</p>
         </div>
         <form class="quiz__form" id="quizForm" novalidate>
-          <ol class="quiz__steps">
-            <li class="quiz__step">
-              <p class="quiz__question">1. Что вам нужно?</p>
-              <div class="quiz__options">
-                <label class="quiz__option"><input type="radio" name="need" value="site"> Сайт</label>
-                <label class="quiz__option"><input type="radio" name="need" value="infographic"> Инфографика для маркетплейсов</label>
-                <label class="quiz__option"><input type="radio" name="need" value="both"> И то, и другое</label>
-              </div>
-            </li>
-            <li class="quiz__step">
-              <p class="quiz__question">2. У вас есть дизайн-макет?</p>
-              <div class="quiz__options">
-                <label class="quiz__option"><input type="radio" name="design" value="yes"> Да, есть</label>
-                <label class="quiz__option"><input type="radio" name="design" value="no"> Нет, нужен дизайн</label>
-              </div>
-            </li>
-            <li class="quiz__step">
-              <p class="quiz__question">3. Какой проект вам нужен?</p>
-              <div class="quiz__options">
-                <label class="quiz__option"><input type="radio" name="project" value="landing"> Лендинг</label>
-                <label class="quiz__option"><input type="radio" name="project" value="corp"> Корпоративный сайт</label>
-                <label class="quiz__option"><input type="radio" name="project" value="shop"> Интернет-магазин</label>
-              </div>
-            </li>
-            <li class="quiz__step">
-              <p class="quiz__question">4. Для какой площадки инфографика?</p>
-              <div class="quiz__options">
-                <label class="quiz__option"><input type="radio" name="marketplace" value="ozon"> Озон</label>
-                <label class="quiz__option"><input type="radio" name="marketplace" value="wb"> Wildberries</label>
-                <label class="quiz__option"><input type="radio" name="marketplace" value="both"> Обе</label>
-                <label class="quiz__option"><input type="radio" name="marketplace" value="other"> Другая</label>
-              </div>
-            </li>
-            <li class="quiz__step">
-              <p class="quiz__question">5. Куда отправить расчёт?</p>
-              <div class="quiz__contact">
-                <label class="quiz__field">
-                  <span class="quiz__label">Email или Telegram</span>
-                  <input type="text" name="contact" class="quiz__input" placeholder="@username или email@mail.ru" required>
-                </label>
-              </div>
-            </li>
-          </ol>
-          <button type="submit" class="btn btn--primary quiz__submit">Получить расчёт</button>
+          <!-- Прогресс-бар -->
+          <div class="quiz__progress" role="progressbar" aria-label="Прогресс квиза" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <span class="quiz__progress-fill" id="quizProgressFill"></span>
+            <span class="quiz__progress-count" id="quizProgressCount">1 / 5</span>
+          </div>
+
+          <!-- Поле скрытой нумерации шага -->
+          <input type="hidden" id="quizCurrent" value="0">
+
+          <!-- Шаг 1: тип задачи -->
+          <div class="quiz__step" data-step="0">
+            <p class="quiz__question">1. Что вам нужно?</p>
+            <div class="quiz__options">
+              <label class="quiz__option"><input type="radio" name="need" value="site" data-next="1"> Сайт</label>
+              <label class="quiz__option"><input type="radio" name="need" value="infographic" data-next="2"> Инфографика для маркетплейсов</label>
+              <label class="quiz__option"><input type="radio" name="need" value="both" data-next="1"> И то, и другое</label>
+            </div>
+          </div>
+
+          <!-- Шаг 2: вопроосы по сайту (сайт / оба) -->
+          <div class="quiz__step" data-step="1" hidden>
+            <p class="quiz__question">2. У вас есть дизайн-макет?</p>
+            <div class="quiz__options">
+              <label class="quiz__option"><input type="radio" name="design" value="yes" data-next="3"> Да, есть</label>
+              <label class="quiz__option"><input type="radio" name="design" value="no" data-next="3"> Нет, нужен дизайн</label>
+            </div>
+          </div>
+
+          <!-- Шаг 3: тип инфографики (инфографика / оба) -->
+          <div class="quiz__step" data-step="2" hidden>
+            <p class="quiz__question">3. Для какой площадки инфографика?</p>
+            <div class="quiz__options">
+              <label class="quiz__option"><input type="radio" name="marketplace" value="ozon" data-next="4"> Озон</label>
+              <label class="quiz__option"><input type="radio" name="marketplace" value="wb" data-next="4"> Wildberries</label>
+              <label class="quiz__option"><input type="radio" name="marketplace" value="both" data-next="4"> Обе</label>
+              <label class="quiz__option"><input type="radio" name="marketplace" value="other" data-next="4"> Другая</label>
+            </div>
+          </div>
+
+          <!-- Шаг 4: тип проекта (сайт / оба) -->
+          <div class="quiz__step" data-step="3" hidden>
+            <p class="quiz__question">4. Какой проект вам нужен?</p>
+            <div class="quiz__options">
+              <label class="quiz__option"><input type="radio" name="project" value="landing" data-next="5"> Лендинг</label>
+              <label class="quiz__option"><input type="radio" name="project" value="corp" data-next="5"> Корпоративный сайт</label>
+              <label class="quiz__option"><input type="radio" name="project" value="shop" data-next="5"> Интернет-магазин</label>
+            </div>
+          </div>
+
+          <!-- Шаг 5: контакты -->
+          <div class="quiz__step" data-step="5" hidden>
+            <p class="quiz__question">5. Куда отправить расчёт?</p>
+            <div class="quiz__contact">
+              <label class="quiz__field">
+                <span class="quiz__label">Email</span>
+                <input type="email" name="email" class="quiz__input" placeholder="email@mail.ru" autocomplete="email">
+              </label>
+              <label class="quiz__field">
+                <span class="quiz__label">Telegram</span>
+                <input type="text" name="telegram" class="quiz__input" placeholder="@username" autocomplete="off">
+              </label>
+              <p class="quiz__hint">Заполните хотя бы одно поле — email или Telegram.</p>
+            </div>
+            <label class="quiz__consent">
+              <input type="checkbox" name="consent" value="1">
+              <span>Соглашаюсь на обработку персональных данных в соответствии с политикой конфиденциальности</span>
+            </label>
+          </div>
+
+          <div class="quiz__controls">
+            <button type="button" class="btn btn--ghost quiz__back" id="quizBack" hidden>Назад</button>
+            <button type="button" class="btn btn--primary quiz__next" id="quizNext">Далее</button>
+            <button type="submit" class="btn btn--primary quiz__submit" id="quizSubmit" hidden>Получить расчёт</button>
+          </div>
           <p class="quiz__note" id="quizStatus" aria-live="polite"></p>
         </form>
       </div>
