@@ -15,6 +15,7 @@ import { initReveal } from './reveal.js';
 import { initFaq } from './faq.js';
 import { initModal } from './modal.js';
 import { initLeadForms } from './lead-forms.js';
+import { initExitIntent, initFloatingCTA } from './cta.js';
 
 initTheme();
 initHeader();
@@ -25,3 +26,5 @@ initReveal();
 initFaq();
 initModal();
 initLeadForms();
+initExitIntent();
+initFloatingCTA();

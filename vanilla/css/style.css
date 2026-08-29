@@ -2535,3 +2535,101 @@ button {
     /* уже задано выше */
   }
 }
+
+/* ============================================
+   Плавающая кнопка «Обсудить проект» (CTA)
+   Появляется через 6с после загрузки или при
+   скролле 40% страницы (см. vanilla/js/cta.js).
+   ============================================ */
+
+.floating-cta {
+  position: fixed;
+  right: 24px;
+  bottom: 96px;
+  z-index: 95;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 14px 22px;
+  border: none;
+  border-radius: 999px;
+
+  background: var(--color-primary, #4f7cff);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+
+  box-shadow: 0 8px 24px rgba(79, 124, 255, 0.35),
+              0 2px 8px rgba(0, 0, 0, 0.15);
+
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease,
+              background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.floating-cta.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.floating-cta:hover {
+  background: var(--color-primary-hover, #3d6ae8);
+  box-shadow: 0 10px 30px rgba(79, 124, 255, 0.45),
+              0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.floating-cta:focus-visible {
+  outline: 2px solid var(--color-primary, #4f7cff);
+  outline-offset: 3px;
+}
+
+.floating-cta:active {
+  transform: translateY(2px) scale(0.98);
+}
+
+.floating-cta__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.floating-cta__icon svg {
+  display: block;
+}
+
+.floating-cta__label {
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes floating-cta-pulse {
+    0%, 100% { box-shadow: 0 8px 24px rgba(79, 124, 255, 0.35), 0 2px 8px rgba(0, 0, 0, 0.15); }
+    50%      { box-shadow: 0 8px 24px rgba(79, 124, 255, 0.55), 0 2px 12px rgba(0, 0, 0, 0.2); }
+  }
+  .floating-cta.is-visible {
+    animation: floating-cta-pulse 2.4s ease-in-out infinite;
+  }
+  .floating-cta:hover {
+    animation: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .floating-cta {
+    right: 16px;
+    left: 16px;
+    bottom: 16px;
+    padding: 14px 18px;
+    font-size: 14px;
+  }
+}
