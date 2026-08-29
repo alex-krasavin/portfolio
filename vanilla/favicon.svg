@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Иконка в стиле сайта: градиентный скруглённый квадрат с монограммой -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00D4B4"/>
+      <stop offset="1" stop-color="#009E87"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="56" height="56" rx="14" fill="#0B1220"/>
+  <rect x="4" y="4" width="56" height="56" rx="14" fill="url(#g)" opacity="0.9"/>
+  <!-- Стилизованная буква "А" (монограмма автора) -->
+  <path d="M32 14 14 50h8l4-9h12l4 9h8L32 14Zm-4 27 4-9 4 9h-8Z" fill="#0B1220"/>
+  <!-- Блики для объёма -->
+  <ellipse cx="20" cy="18" rx="12" ry="6" fill="#ffffff" opacity="0.08"/>
+</svg>

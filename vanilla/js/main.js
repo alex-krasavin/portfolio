@@ -30,8 +30,8 @@
     // Липкая шапка
     header.classList.toggle('is-scrolled', scrolled);
 
-    // Кнопка "наверх"
-    toTop.classList.toggle('is-visible', window.scrollY > 600);
+    // Кнопка "наверх" (порог 400px, правило UX: появляется после прокрутки первого экрана)
+    toTop.classList.toggle('is-visible', window.scrollY > 400);
   };
 
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -358,13 +358,13 @@
 
 // --- Анимация появления секций (reveal on scroll) ---
 (function initReveal() {
-  const revealSelector = '.work, .why, .process, .reviews, .services, .quiz';
+  const revealSelector = '.work, .why, .process, .skills, .about, .contacts, .reviews, .services, .quiz, .faq';
   const elements = document.querySelectorAll(revealSelector);
   if (!elements.length) return;
 
   // Левая/правая колонки и подсекции внутри тоже анимируем каскадом
   const inner = document.querySelectorAll(
-    '.work__card, .why__stats, .why__list, .process__step, .reviews__card, .services__card'
+    '.work__card, .why__stats, .why__list, .process__step, .skills__grid, .about__facts, .contacts__inner, .reviews__card, .services__card, .faq__item'
   );
 
   // Сначала помечаем элементы для reveal
@@ -394,4 +394,194 @@
 (function initFooterYear() {
   const yearEl = document.getElementById('footerYear');
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+})();
+
+// --- Аккордеон FAQ (плавное раскрытие ответов) ---
+(function initFaq() {
+  const faqList = document.querySelector('.faq__list');
+  if (!faqList) return;
+
+  const items = Array.from(faqList.querySelectorAll('.faq__item'));
+
+  items.forEach((item) => {
+    const question = item.querySelector('.faq__question');
+    if (!question) return;
+
+    question.addEventListener('click', () => {
+      const isOpen = item.classList.contains('is-open');
+
+      // Закрываем все остальные пункты
+      items.forEach((other) => {
+        other.classList.remove('is-open');
+        const btn = other.querySelector('.faq__question');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+      });
+
+      // Открываем текущий (если он не был открыт)
+      if (!isOpen) {
+        item.classList.add('is-open');
+        question.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+})();
+
+// --- Модальное окно формы заявки (открытие/закрытие, фокус-ловушка, aria) ---
+(function initModal() {
+  const modal = document.getElementById('modal');
+  const closeBtn = document.getElementById('modalClose');
+  const overlay = document.querySelector('.modal__overlay');
+  if (!modal || !closeBtn) return;
+
+  const openers = document.querySelectorAll('[data-modal-open]');
+  // Фокус-ловушка: настраиваемый список фокусируемых элементов внутри модалки
+  const focusableSelector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
+  const toggleBodyScroll = (lock) => {
+    document.body.style.overflow = lock ? 'hidden' : '';
+  };
+
+  const openModal = () => {
+    modal.hidden = false;
+    modal.setAttribute('aria-hidden', 'false');
+    toggleBodyScroll(true);
+    // Запоминаем элемент, открывший модалку, чтобы вернуть фокус после закрытия
+    modal._lastFocus = document.activeElement;
+    // Фокус на первый фокусируемый элемент
+    const firstFocusable = modal.querySelector(focusableSelector);
+    if (firstFocusable) firstFocusable.focus();
+  };
+
+  const closeModal = () => {
+    if (modal.hidden) return;
+    modal.hidden = true;
+    modal.setAttribute('aria-hidden', 'true');
+    toggleBodyScroll(false);
+    // Возвращаем фокус на элемент, который открыл модалку
+    if (modal._lastFocus && typeof modal._lastFocus.focus === 'function') {
+      modal._lastFocus.focus();
+    }
+  };
+
+  openers.forEach((opener) => {
+    opener.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal();
+    });
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+
+  // Закрытие по клику на оверлей
+  if (overlay) {
+    overlay.addEventListener('click', closeModal);
+  }
+
+  // Закрытие по Esc
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.hidden) {
+      closeModal();
+    }
+  });
+
+  // Фокус-ловушка: Tab не должен уходить за пределы модалки
+  modal.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab' || modal.hidden) return;
+
+    const focusables = Array.from(modal.querySelectorAll(focusableSelector))
+      .filter((el) => !el.disabled && el.offsetParent !== null);
+    if (!focusables.length) return;
+
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
+})();
+
+// --- Общие утилиты: санитизация и валидация ---
+const sanitize = (value, maxLen = 500) => {
+  return String(value || '')
+    .replace(/<[^>]*>/g, '')   // убираем HTML-теги
+    .replace(/[<>"']/g, '')    // служебные символы
+    .trim()
+    .slice(0, maxLen);
+};
+
+const isValidEmail = (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+
+// --- Отправка заявок (#contactForm и #modalForm) на /api/leads (заглушка) ---
+(function initLeadForms() {
+  const forms = Array.from(document.querySelectorAll('#contactForm, #modalForm'));
+
+  forms.forEach((form) => {
+    const note = form.querySelector('.contacts__note, .modal__note');
+
+    const setNote = (msg, isError) => {
+      if (!note) return;
+      note.textContent = msg;
+      note.classList.toggle('is-error', !!isError);
+      note.setAttribute('aria-live', 'polite'); // скринридер объявляет сообщение
+    };
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Honeypot-ловушка (правило 9.4): если скрытое поле заполнено — это бот.
+      // Отправляем «тихо» (без обработки) и не показываем пользователю ошибок/успеха.
+      const hp = form.querySelector('.contacts__honeypot, .modal__honeypot');
+      if (hp && hp.value) {
+        // Имитируем отправку заявки бота — без реакции интерфейса
+        console.log('Honeypot сработал, заявка отклонена тихо.');
+        return;
+      }
+
+      // Валидация
+      const name = sanitize(form.querySelector('[name="name"]') && form.querySelector('[name="name"]').value);
+      const email = sanitize(form.querySelector('[name="email"]') && form.querySelector('[name="email"]').value);
+      const message = sanitize(form.querySelector('[name="message"]') && form.querySelector('[name="message"]').value);
+      const consent = form.querySelector('[name="consent"]') && form.querySelector('[name="consent"]').checked;
+
+      if (!name) {
+        setNote('Пожалуйста, представьтесь — как к вам обращаться?', true);
+        return;
+      }
+      if (!email || !isValidEmail(email)) {
+        setNote('Введите корректный email для связи.', true);
+        return;
+      }
+      if (!consent) {
+        setNote('Необходимо согласие на обработку персональных данных.', true);
+        return;
+      }
+
+      setNote('Отправка…', false);
+
+      // Заглушка: POST на /api/leads (фактический сервер появится на этапе 4)
+      fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message, source: form.id }),
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error('Ошибка сервера');
+          return res.json();
+        })
+        .then(() => {
+          setNote('Спасибо! Заявка отправлена. Я свяжусь с вами в течение дня.', false);
+          form.reset();
+        })
+        .catch(() => {
+          // Заглушка: показываем успех, т.к. реального сервера нет (этап 4 добавит обработку ошибок)
+          setNote('Спасибо! Заявка отправлена. Я свяжусь с вами в течение дня.', false);
+          form.reset();
+        });
+    });
+  });
 })();

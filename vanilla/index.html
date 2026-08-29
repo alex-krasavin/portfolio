@@ -8,8 +8,8 @@
   <script>
     (function () {
       try {
-        var saved = localStorage.getItem('theme');
-        var system = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        let saved = localStorage.getItem('theme');
+        let system = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', saved || system);
       } catch (e) {
         /* localStorage недоступен — оставляем тему из HTML (dark) */
@@ -25,6 +25,19 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://krasavin.ru/">
   <meta property="og:image" content="https://krasavin.ru/og-image.png">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Красавин Александр",
+    "jobTitle": "Веб-разработчик",
+    "url": "https://krasavin.ru/",
+    "email": "mailto:hello@krasavin.ru",
+    "image": "https://krasavin.ru/og-image.png",
+    "knowsAbout": ["Веб-разработка", "HTML", "CSS", "JavaScript", "React", "UX/UI", "Инфографика для маркетплейсов"]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -52,9 +65,10 @@
         <ul class="header__menu">
           <li class="header__item"><a href="#services" class="header__link">Услуги</a></li>
           <li class="header__item"><a href="#work" class="header__link">Работы</a></li>
-          <li class="header__item"><a href="#why" class="header__link">Почему я</a></li>
-          <li class="header__item"><a href="#process" class="header__link">Как я работаю</a></li>
-          <li class="header__item"><a href="#reviews" class="header__link">Отзывы</a></li>
+          <li class="header__item"><a href="#benefits" class="header__link">Выгоды для бизнеса</a></li>
+          <li class="header__item"><a href="#about" class="header__link">Обо мне</a></li>
+          <li class="header__item"><a href="#steps" class="header__link">Простые 3 шага</a></li>
+          <li class="header__item"><a href="#faq" class="header__link">FAQ</a></li>
         </ul>
       </nav>
 
@@ -87,7 +101,7 @@
           </span>
         </button>
 
-        <!-- CTA ведёт на квиз -->
+        <!-- CTA ведёт на квиз (ТЗ §4 п.2: CTA-кнопка «Связаться» → форма/квиз) -->
         <a href="#quiz" class="btn btn--primary header__cta">Обсудить проект</a>
 
         <!-- Бургер -->
@@ -175,104 +189,6 @@
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Квиз / CTA: собирает ТЗ (поэтапный, с прогресс-баром и ветвлением) -->
-    <section class="quiz" id="quiz">
-      <div class="container">
-        <div class="quiz__head">
-          <p class="quiz__subtitle">Квиз</p>
-          <h2 class="quiz__title">Пройдите пару вопросов — получите расчёт за 1 день</h2>
-          <p class="quiz__text">Отвечайте по одному вопросу. Я подберу вопросы под вашу задачу и подготовлю точный расчёт и коммерческое предложение.</p>
-        </div>
-        <form class="quiz__form" id="quizForm" novalidate>
-          <!-- Прогресс-бар -->
-          <div class="quiz__progress" role="progressbar" aria-label="Прогресс квиза" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-            <span class="quiz__progress-fill" id="quizProgressFill"></span>
-            <span class="quiz__progress-count" id="quizProgressCount">1 / 5</span>
-          </div>
-
-          <!-- Поле скрытой нумерации шага -->
-          <input type="hidden" id="quizCurrent" value="0">
-
-          <!-- Шаг 1: тип задачи -->
-          <div class="quiz__step" data-step="0">
-            <p class="quiz__question">1. Что вам нужно?</p>
-            <div class="quiz__options">
-              <label class="quiz__option"><input type="radio" name="need" value="site" data-next="1"> Сайт</label>
-              <label class="quiz__option"><input type="radio" name="need" value="infographic" data-next="2"> Инфографика для маркетплейсов</label>
-              <label class="quiz__option"><input type="radio" name="need" value="both" data-next="1"> И то, и другое</label>
-            </div>
-          </div>
-
-          <!-- Шаг 2: вопроосы по сайту (сайт / оба) -->
-          <div class="quiz__step" data-step="1" hidden>
-            <p class="quiz__question">2. У вас есть дизайн-макет?</p>
-            <div class="quiz__options">
-              <label class="quiz__option"><input type="radio" name="design" value="yes" data-next="3"> Да, есть</label>
-              <label class="quiz__option"><input type="radio" name="design" value="no" data-next="3"> Нет, нужен дизайн</label>
-            </div>
-          </div>
-
-          <!-- Шаг 3: тип инфографики (инфографика / оба) -->
-          <div class="quiz__step" data-step="2" hidden>
-            <p class="quiz__question">3. Для какой площадки инфографика?</p>
-            <div class="quiz__options">
-              <label class="quiz__option"><input type="radio" name="marketplace" value="ozon" data-next="4"> Озон</label>
-              <label class="quiz__option"><input type="radio" name="marketplace" value="wb" data-next="4"> Wildberries</label>
-              <label class="quiz__option"><input type="radio" name="marketplace" value="both" data-next="4"> Обе</label>
-              <label class="quiz__option"><input type="radio" name="marketplace" value="other" data-next="4"> Другая</label>
-            </div>
-          </div>
-
-          <!-- Шаг 4: тип проекта (сайт / оба) -->
-          <div class="quiz__step" data-step="3" hidden>
-            <p class="quiz__question">4. Какой проект вам нужен?</p>
-            <div class="quiz__options">
-              <label class="quiz__option"><input type="radio" name="project" value="landing" data-next="5"> Лендинг</label>
-              <label class="quiz__option"><input type="radio" name="project" value="corp" data-next="5"> Корпоративный сайт</label>
-              <label class="quiz__option"><input type="radio" name="project" value="shop" data-next="5"> Интернет-магазин</label>
-            </div>
-          </div>
-
-          <!-- Шаг 5: контакты -->
-          <div class="quiz__step" data-step="5" hidden>
-            <p class="quiz__question">5. Куда отправить расчёт?</p>
-            <div class="quiz__contact">
-              <label class="quiz__field">
-                <span class="quiz__label">Email</span>
-                <input type="email" name="email" class="quiz__input" placeholder="email@mail.ru" autocomplete="email">
-              </label>
-              <label class="quiz__field">
-                <span class="quiz__label">Telegram</span>
-                <input type="text" name="telegram" class="quiz__input" placeholder="@username" autocomplete="off">
-              </label>
-              <p class="quiz__hint">Заполните хотя бы одно поле — email или Telegram.</p>
-
-              <!-- Описание пожеланий (необязательное поле) -->
-              <label class="quiz__field quiz__field--textarea">
-                <span class="quiz__label">
-                  Опишите ваши пожелания
-                  <span class="quiz__label-optional">(необязательно)</span>
-                </span>
-                <textarea name="message" class="quiz__textarea" rows="4" maxlength="500" placeholder="Например: нужен лендинг под ключ, уже есть макет, интересует инфографика для WB..."></textarea>
-                <span class="quiz__textarea-counter" id="quizMessageCounter">0 / 500</span>
-              </label>
-            </div>
-            <label class="quiz__consent">
-              <input type="checkbox" name="consent" value="1">
-              <span>Соглашаюсь на обработку персональных данных в соответствии с политикой конфиденциальности</span>
-            </label>
-          </div>
-
-          <div class="quiz__controls">
-            <button type="button" class="btn btn--ghost quiz__back" id="quizBack" hidden>Назад</button>
-            <button type="button" class="btn btn--primary quiz__next" id="quizNext">Далее</button>
-            <button type="submit" class="btn btn--primary quiz__submit" id="quizSubmit" disabled>Получить расчёт</button>
-          </div>
-          <p class="quiz__note" id="quizStatus" aria-live="polite"></p>
-        </form>
       </div>
     </section>
 
@@ -558,15 +474,15 @@
       </div>
     </section>
 
-    <!-- Почему я: аргументы доверия -->
-    <section class="why" id="why" aria-labelledby="whyTitle">
+    <!-- Выгоды для бизнеса: зачем клиенту работать со мной -->
+    <section class="why" id="benefits" aria-labelledby="whyTitle">
       <div class="container why__inner">
         <div class="why__content">
-          <p class="why__subtitle">Почему я</p>
-          <h2 class="why__title" id="whyTitle">Работаю без посредников — и это выгодно вам</h2>
+          <p class="why__subtitle">Выгоды для бизнеса</p>
+          <h2 class="why__title" id="whyTitle">Сайт — это инструмент, который окупается</h2>
           <p class="why__text">
-            Я сам дизайню, верстаю и настраиваю сайты — без студий, менеджеров и переплаты за
-            «прослойку». Вы общаетесь напрямую с исполнителем на всех этапах.
+            Вкладываетесь не в «красивую картинку», а в работающий канал заявок: быструю загрузку,
+            продающую структуру, понятные формы. Каждый блок решает задачу вашего бизнеса.
           </p>
 
           <ul class="why__list">
@@ -577,8 +493,8 @@
                 </svg>
               </span>
               <div>
-                <h3 class="why__item-title">Прямая коммуникация</h3>
-                <p class="why__item-text">Без цепочки менеджеров — все вопросы решаем напрямую в переписке.</p>
+                <h3 class="why__item-title">Больше заявок</h3>
+                <p class="why__item-text">Продающая структура и квиз собирают обращения, а не просто «посетителей».</p>
               </div>
             </li>
             <li class="why__item">
@@ -588,8 +504,8 @@
                 </svg>
               </span>
               <div>
-                <h3 class="why__item-title">Фиксированные сроки</h3>
-                <p class="why__item-text">Согласовываю этапы и даты заранее, показываю прогресс на каждом шаге.</p>
+                <h3 class="why__item-title">Быстрый запуск</h3>
+                <p class="why__item-text">Без долгих согласований и лишних слоёв — от брифа до запуска за 2–4 недели.</p>
               </div>
             </li>
             <li class="why__item">
@@ -599,8 +515,8 @@
                 </svg>
               </span>
               <div>
-                <h3 class="why__item-title">Гарантия и поддержка</h3>
-                <p class="why__item-text">После запуска на связи: правки и мелкие доработки — бесплатно 14 дней.</p>
+                <h3 class="why__item-title">Экономия бюджета</h3>
+                <p class="why__item-text">Один исполнитель вместо команды: без наценок агентства и «прослойки» менеджеров.</p>
               </div>
             </li>
           </ul>
@@ -628,37 +544,302 @@
       </div>
     </section>
 
-    <!-- Как я работаю: этапы процесса -->
-    <section class="process" id="process" aria-labelledby="processTitle">
+    <!-- Навыки: стек и технологии -->
+    <section class="skills" id="skills" aria-labelledby="skillsTitle">
+      <div class="container">
+        <div class="skills__head">
+          <p class="skills__subtitle">Навыки</p>
+          <h2 class="skills__title" id="skillsTitle">Технологии и инструменты</h2>
+          <p class="skills__text">Работаю в современном стеке — от семантичной вёрстки до сложных интеграций и высокого качества кода.</p>
+        </div>
+
+        <ul class="skills__grid">
+          <li class="skills__item">
+            <span class="skills__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 6h16M4 12h16M9 18h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="skills__name">HTML5 / CSS3</span>
+            <span class="skills__level">Семантика, BEM, Grid/Flexbox</span>
+          </li>
+          <li class="skills__item">
+            <span class="skills__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="skills__name">JavaScript (ES6+)</span>
+            <span class="skills__level">Интерактив, анимации, обработка данных</span>
+          </li>
+          <li class="skills__item">
+            <span class="skills__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M12 3C8 8 8 16 12 21M12 3c4 5 4 13 0 18" stroke="currentColor" stroke-width="1.8"/>
+                <circle cx="3" cy="12" r="0.5" fill="currentColor"/><circle cx="21" cy="12" r="0.5" fill="currentColor"/>
+              </svg>
+            </span>
+            <span class="skills__name">React / Vue</span>
+            <span class="skills__level">SPA, компонентный подход</span>
+          </li>
+          <li class="skills__item">
+            <span class="skills__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M9 8h6M9 12h6M9 16h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="skills__name">Figma</span>
+            <span class="skills__level">Макеты, UI-киты, прототипы</span>
+          </li>
+          <li class="skills__item">
+            <span class="skills__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 4l2 16h12l2-16" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M8 9h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="skills__name">Git / GitHub</span>
+            <span class="skills__level">Контроль версий, командная работа</span>
+          </li>
+          <li class="skills__item">
+            <span class="skills__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="4" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M8 22h8M12 18v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="skills__name">Адаптив / SEO</span>
+            <span class="skills__level">320–2560px, Core Web Vitals, мета</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Обо мне: биография и факты -->
+    <section class="about" id="about" aria-labelledby="aboutTitle">
+      <div class="container about__inner">
+        <div class="about__content">
+          <p class="about__subtitle">Обо мне</p>
+          <h2 class="about__title" id="aboutTitle">Проектирую и собираю сайты целиком</h2>
+          <p class="about__text">
+            Меня зовут Красавин Александр. Уже 5+ лет помогаю бизнесу получать заявки через сайты,
+            которые быстро грузятся и продают. Сам прохожу путь от идеи до запуска: анализирую задачу,
+            делаю дизайн, верстаю и настраиваю аналитику и SEO.
+          </p>
+          <p class="about__text">
+            Работаю без посредников — поэтому вы экономите на комиссии агентства, а качество
+            не страдает от «испорченного телефона» между дизайнером, верстальщиком и менеджером.
+          </p>
+        </div>
+        <div class="about__facts">
+          <div class="about__fact">
+            <span class="about__fact-value">5+ лет</span>
+            <span class="about__fact-label">в веб-разработке</span>
+          </div>
+          <div class="about__fact">
+            <span class="about__fact-value">40+</span>
+            <span class="about__fact-label">запущенных проектов</span>
+          </div>
+          <div class="about__fact">
+            <span class="about__fact-value">2–4 нед.</span>
+            <span class="about__fact-label">средний срок проекта</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Простые 3 шага: как быстро начинается работа -->
+    <section class="process" id="steps" aria-labelledby="processTitle">
       <div class="container">
         <div class="process__head">
-          <p class="process__subtitle">Как я работаю</p>
-          <h2 class="process__title" id="processTitle">Понятный процесс от заявки до запуска</h2>
-          <p class="process__text">Каждый этап согласовываем до перехода к следующему — без сюрпризов и переделок.</p>
+          <p class="process__subtitle">Простые 3 шага</p>
+          <h2 class="process__title" id="processTitle">Начнём работу за 3 простых шага</h2>
+          <p class="process__text">Минимум действий с вашей стороны — максимум пользы для бизнеса.</p>
         </div>
 
         <ol class="process__list">
           <li class="process__step">
             <span class="process__step-num">01</span>
-            <h3 class="process__step-title">Бриф и расчёт</h3>
-            <p class="process__step-text">Проходите квиз или пишете напрямую — уточняю задачу и присылаю расчёт.</p>
+            <h3 class="process__step-title">Опишите задачу</h3>
+            <p class="process__step-text">Пройдите квиз или напишите напрямую — уточню детали и пришлю расчёт за 1 день.</p>
           </li>
           <li class="process__step">
             <span class="process__step-num">02</span>
-            <h3 class="process__step-title">Дизайн-концепт</h3>
-            <p class="process__step-text">Готовлю макет ключевых экранов, согласовываем стиль и структуру.</p>
+            <h3 class="process__step-title">Вы утверждаете макет</h3>
+            <p class="process__step-text">Готовлю дизайн-концепт, вы утверждаете — и я сразу приступаю к вёрстке.</p>
           </li>
           <li class="process__step">
             <span class="process__step-num">03</span>
-            <h3 class="process__step-title">Вёрстка и функционал</h3>
-            <p class="process__step-text">Собираю сайт: адаптив, анимации, формы — показываю промежуточные результаты.</p>
-          </li>
-          <li class="process__step">
-            <span class="process__step-num">04</span>
-            <h3 class="process__step-title">Запуск и поддержка</h3>
-            <p class="process__step-text">Тестируем, публикуем на хостинге, остаюсь на связи для правок.</p>
+            <h3 class="process__step-title">Запускаем и растем</h3>
+            <p class="process__step-text">Сайт виден клиентам, собирает заявки. Остаюсь на связи для правок и развития.</p>
           </li>
         </ol>
+      </div>
+    </section>
+
+    <!-- Квиз / CTA: собирает ТЗ (поэтапный, с прогресс-баром и ветвлением) -->
+    <section class="quiz" id="quiz">
+      <div class="container">
+        <div class="quiz__head">
+          <p class="quiz__subtitle">Квиз</p>
+          <h2 class="quiz__title">Пройдите пару вопросов — получите расчёт за 1 день</h2>
+          <p class="quiz__text">Отвечайте по одному вопросу. Я подберу вопросы под вашу задачу и подготовлю точный расчёт и коммерческое предложение.</p>
+        </div>
+        <form class="quiz__form" id="quizForm" novalidate>
+          <!-- Прогресс-бар -->
+          <div class="quiz__progress" role="progressbar" aria-label="Прогресс квиза" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <span class="quiz__progress-fill" id="quizProgressFill"></span>
+            <span class="quiz__progress-count" id="quizProgressCount">1 / 5</span>
+          </div>
+
+          <!-- Поле скрытой нумерации шага -->
+          <input type="hidden" id="quizCurrent" value="0">
+
+          <!-- Шаг 1: тип задачи -->
+          <div class="quiz__step" data-step="0">
+            <p class="quiz__question">1. Что вам нужно?</p>
+            <div class="quiz__options">
+              <label class="quiz__option"><input type="radio" name="need" value="site" data-next="1"> Сайт</label>
+              <label class="quiz__option"><input type="radio" name="need" value="infographic" data-next="2"> Инфографика для маркетплейсов</label>
+              <label class="quiz__option"><input type="radio" name="need" value="both" data-next="1"> И то, и другое</label>
+            </div>
+          </div>
+
+          <!-- Шаг 2: вопроосы по сайту (сайт / оба) -->
+          <div class="quiz__step" data-step="1" hidden>
+            <p class="quiz__question">2. У вас есть дизайн-макет?</p>
+            <div class="quiz__options">
+              <label class="quiz__option"><input type="radio" name="design" value="yes" data-next="3"> Да, есть</label>
+              <label class="quiz__option"><input type="radio" name="design" value="no" data-next="3"> Нет, нужен дизайн</label>
+            </div>
+          </div>
+
+          <!-- Шаг 3: тип инфографики (инфографика / оба) -->
+          <div class="quiz__step" data-step="2" hidden>
+            <p class="quiz__question">3. Для какой площадки инфографика?</p>
+            <div class="quiz__options">
+              <label class="quiz__option"><input type="radio" name="marketplace" value="ozon" data-next="4"> Озон</label>
+              <label class="quiz__option"><input type="radio" name="marketplace" value="wb" data-next="4"> Wildberries</label>
+              <label class="quiz__option"><input type="radio" name="marketplace" value="both" data-next="4"> Обе</label>
+              <label class="quiz__option"><input type="radio" name="marketplace" value="other" data-next="4"> Другая</label>
+            </div>
+          </div>
+
+          <!-- Шаг 4: тип проекта (сайт / оба) -->
+          <div class="quiz__step" data-step="3" hidden>
+            <p class="quiz__question">4. Какой проект вам нужен?</p>
+            <div class="quiz__options">
+              <label class="quiz__option"><input type="radio" name="project" value="landing" data-next="5"> Лендинг</label>
+              <label class="quiz__option"><input type="radio" name="project" value="corp" data-next="5"> Корпоративный сайт</label>
+              <label class="quiz__option"><input type="radio" name="project" value="shop" data-next="5"> Интернет-магазин</label>
+            </div>
+          </div>
+
+          <!-- Шаг 5: контакты -->
+          <div class="quiz__step" data-step="5" hidden>
+            <p class="quiz__question">5. Куда отправить расчёт?</p>
+            <div class="quiz__contact">
+              <label class="quiz__field">
+                <span class="quiz__label">Email</span>
+                <input type="email" name="email" class="quiz__input" placeholder="email@mail.ru" autocomplete="email">
+              </label>
+              <label class="quiz__field">
+                <span class="quiz__label">Telegram</span>
+                <input type="text" name="telegram" class="quiz__input" placeholder="@username" autocomplete="off">
+              </label>
+              <p class="quiz__hint">Заполните хотя бы одно поле — email или Telegram.</p>
+
+              <!-- Описание пожеланий (необязательное поле) -->
+              <label class="quiz__field quiz__field--textarea">
+                <span class="quiz__label">
+                  Опишите ваши пожелания
+                  <span class="quiz__label-optional">(необязательно)</span>
+                </span>
+                <textarea name="message" class="quiz__textarea" rows="4" maxlength="500" placeholder="Например: нужен лендинг под ключ, уже есть макет, интересует инфографика для WB..."></textarea>
+                <span class="quiz__textarea-counter" id="quizMessageCounter">0 / 500</span>
+              </label>
+            </div>
+            <label class="quiz__consent">
+              <input type="checkbox" name="consent" value="1">
+              <span>Соглашаюсь на обработку персональных данных в соответствии с политикой конфиденциальности</span>
+            </label>
+          </div>
+
+          <div class="quiz__controls">
+            <button type="button" class="btn btn--ghost quiz__back" id="quizBack" hidden>Назад</button>
+            <button type="button" class="btn btn--primary quiz__next" id="quizNext">Далее</button>
+            <button type="submit" class="btn btn--primary quiz__submit" id="quizSubmit" disabled>Получить расчёт</button>
+          </div>
+          <p class="quiz__note" id="quizStatus" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- Частые вопросы -->
+    <section class="faq" id="faq" aria-labelledby="faqTitle">
+      <div class="container">
+        <div class="faq__head">
+          <p class="faq__subtitle">FAQ</p>
+          <h2 class="faq__title" id="faqTitle">Частые вопросы</h2>
+        </div>
+        <div class="faq__list">
+          <div class="faq__item">
+            <button type="button" class="faq__question" aria-expanded="false">
+              <span>Сколько стоит сайт?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__answer">
+              <p>Стоимость зависит от задачи: лендинг — от 25 тыс. ₽, корпоративный сайт — от 45 тыс. ₽. Точную цену называю после брифа в квизе.</p>
+            </div>
+          </div>
+          <div class="faq__item">
+            <button type="button" class="faq__question" aria-expanded="false">
+              <span>Сколько времени занимает создание сайта?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__answer">
+              <p>Лендинг — от 5 до 10 рабочих дней, корпоративный сайт — от 2 до 4 недель. Сроки фиксируем в договоре и показываем прогресс на каждом этапе.</p>
+            </div>
+          </div>
+          <div class="faq__item">
+            <button type="button" class="faq__question" aria-expanded="false">
+              <span>Что нужно для старта?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__answer">
+              <p>Достаточно заполнить квиз и прислать материалы: тексты, логотип, примеры работ, которые нравятся. Если чего-то нет — помогу собрать.</p>
+            </div>
+          </div>
+          <div class="faq__item">
+            <button type="button" class="faq__question" aria-expanded="false">
+              <span>Будет ли сайт работать на телефонах?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__answer">
+              <p>Да, все сайты адаптирую под 320–2560px: мобильные, планшеты, десктоп. Проверяю вёрстку на реальных устройствах перед запуском.</p>
+            </div>
+          </div>
+          <div class="faq__item">
+            <button type="button" class="faq__question" aria-expanded="false">
+              <span>Делаете ли вы доработку уже готового сайта?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__answer">
+              <p>Да, беру на редизайн и доработку существующие сайты: обновляю дизайн, ускоряю загрузку, добавляю формы и интеграции с CRM.</p>
+            </div>
+          </div>
+          <div class="faq__item">
+            <button type="button" class="faq__question" aria-expanded="false">
+              <span>Что входит в поддержку после запуска?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__answer">
+              <p>14 дней бесплатно: правки по мелочам, консультации и гарантийное устранение багов. Дальше — по договору поддержки, на удобных условиях.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -704,6 +885,61 @@
         </div>
       </div>
     </section>
+
+    <!-- Контакты: прямая форма заявки -->
+    <section class="contacts" id="contacts" aria-labelledby="contactsTitle">
+      <div class="container contacts__inner">
+        <div class="contacts__info">
+          <p class="contacts__subtitle">Контакты</p>
+          <h2 class="contacts__title" id="contactsTitle">Обсудим ваш проект?</h2>
+          <p class="contacts__text">
+            Напишите мне — отвечу в течение рабочего дня, помогу с выбором и подготовлю точный расчёт.
+            Если удобнее квиз — пройдите пару вопросов, и я сам вернусь с предложением.
+          </p>
+          <ul class="contacts__list">
+            <li class="contacts__item">
+              <span class="contacts__item-label">Email</span>
+              <a href="mailto:hello@krasavin.ru" class="contacts__link">hello@krasavin.ru</a>
+            </li>
+            <li class="contacts__item">
+              <span class="contacts__item-label">Telegram</span>
+              <a href="https://t.me/" class="contacts__link" target="_blank" rel="noopener">@krasavin_dev</a>
+            </li>
+            <li class="contacts__item">
+              <span class="contacts__item-label">ВКонтакте</span>
+              <a href="https://vk.com/" class="contacts__link" target="_blank" rel="noopener">vk.com/krasavin_dev</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Форма прямой заявки (с honeypot-полем) -->
+        <form class="contacts__form" id="contactForm" novalidate>
+          <h3 class="contacts__form-title">Оставить заявку</h3>
+          <label class="contacts__field">
+            <span class="contacts__label">Ваше имя</span>
+            <input type="text" name="name" class="contacts__input" placeholder="Иван" required autocomplete="name">
+          </label>
+          <label class="contacts__field">
+            <span class="contacts__label">Email или Telegram</span>
+            <input type="text" name="contact" class="contacts__input" placeholder="email@mail.ru или @username" required autocomplete="off">
+          </label>
+          <label class="contacts__field">
+            <span class="contacts__label">Сообщение</span>
+            <textarea name="message" class="contacts__textarea" rows="4" placeholder="Опишите задачу кратко"></textarea>
+          </label>
+
+          <!-- Honeypot: скрытое поле-ловушка против спам-ботов (правило 9.4) -->
+          <input type="text" name="website" class="contacts__honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <label class="contacts__consent">
+            <input type="checkbox" name="consent" value="1" required>
+            <span>Соглашаюсь на обработку персональных данных в соответствии с политикой конфиденциальности</span>
+          </label>
+          <button type="submit" class="btn btn--primary contacts__submit">Отправить</button>
+          <p class="contacts__note" id="contactStatus" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
   </main>
 
   <!-- Подвал -->
@@ -727,9 +963,10 @@
         <span class="footer__nav-title">Разделы</span>
         <a href="#services" class="footer__link">Услуги</a>
         <a href="#work" class="footer__link">Работы</a>
-        <a href="#why" class="footer__link">Почему я</a>
-        <a href="#process" class="footer__link">Как я работаю</a>
-        <a href="#reviews" class="footer__link">Отзывы</a>
+        <a href="#benefits" class="footer__link">Выгоды для бизнеса</a>
+        <a href="#about" class="footer__link">Обо мне</a>
+        <a href="#steps" class="footer__link">Простые 3 шага</a>
+        <a href="#faq" class="footer__link">FAQ</a>
       </nav>
 
       <div class="footer__contacts">
@@ -750,6 +987,43 @@
       <p class="footer__copy">© <span id="footerYear">2026</span> Красавин Александр. Все права защищены.</p>
     </div>
   </footer>
+
+  <!-- Модальное окно с формой заявки -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true" hidden>
+    <div class="modal__overlay" data-modal-close></div>
+    <div class="modal__dialog" role="document">
+      <button type="button" class="modal__close" data-modal-close aria-label="Закрыть окно">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div class="modal__content">
+        <h3 class="modal__title" id="modalTitle">Обсудить проект</h3>
+        <p class="modal__text">Оставьте контакты — свяжусь в течение рабочего дня с расчётом.</p>
+
+        <form class="modal__form" id="modalForm" novalidate>
+          <label class="modal__field">
+            <span class="modal__label">Ваше имя</span>
+            <input type="text" name="name" class="modal__input" placeholder="Иван" required autocomplete="name">
+          </label>
+          <label class="modal__field">
+            <span class="modal__label">Email или Telegram</span>
+            <input type="text" name="contact" class="modal__input" placeholder="email@mail.ru или @username" required autocomplete="off">
+          </label>
+
+          <!-- Honeypot: скрытое поле-ловушка против спам-ботов (правило 9.4) -->
+          <input type="text" name="website" class="modal__honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <label class="modal__consent">
+            <input type="checkbox" name="consent" value="1" required>
+            <span>Соглашаюсь на обработку персональных данных в соответствии с политикой конфиденциальности</span>
+          </label>
+          <button type="submit" class="btn btn--primary modal__submit">Отправить</button>
+          <p class="modal__note" id="modalStatus" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <!-- Куки-баннер -->
   <div class="cookie" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Уведомление об использовании cookie" hidden>

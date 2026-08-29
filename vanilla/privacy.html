@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Политика конфиденциальности и обработки персональных данных (ФЗ-152) портфолио Красавина Александра.">
+  <title>Политика конфиденциальности — Красавин Александр</title>
+
+  <!-- Тема по умолчанию из localStorage (без FOUC, правило 6.5) -->
+  <script>
+    (function () {
+      try {
+        var theme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+
+  <style>
+    /* Минимальная загрузка стилей: переиспользуем переменные из style.css */
+    :root, [data-theme="dark"] {
+      --bg-primary: #0B1220;
+      --bg-secondary: #111B2E;
+      --bg-card: #16213A;
+      --text-primary: #E6EDF7;
+      --text-secondary: #9AA9BD;
+      --text-muted: #64748B;
+      --accent: #00D4B4;
+      --accent-hover: #00BFA3;
+      --accent-soft: rgba(0, 212, 180, 0.12);
+      --border-color: rgba(230, 237, 247, 0.1);
+      --shadow-color: rgba(0, 0, 0, 0.4);
+    }
+    [data-theme="light"] {
+      --bg-primary: #F6F9FC;
+      --bg-secondary: #EDF2F8;
+      --bg-card: #FFFFFF;
+      --text-primary: #0B1220;
+      --text-secondary: #47566B;
+      --text-muted: #64748B;
+      --accent: #00BFA3;
+      --accent-hover: #009E87;
+      --accent-soft: rgba(0, 191, 163, 0.1);
+      --border-color: rgba(11, 18, 32, 0.1);
+      --shadow-color: rgba(11, 18, 32, 0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Manrope", "Segoe UI", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text-primary);
+      background-color: var(--bg-primary);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+    .page-top { padding: 96px 0 24px; background-color: var(--bg-secondary); border-bottom: 1px solid var(--border-color); }
+    .page-top__inner h1 {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .page-top__inner p { color: var(--text-secondary); }
+    .policy { padding: 48px 0 72px; }
+    .policy__block { padding: 28px 0; border-bottom: 1px solid var(--border-color); }
+    .policy__block:last-child { border-bottom: none; }
+    .policy__block h2 { font-size: 20px; margin-bottom: 12px; color: var(--accent); }
+    .policy__block p { margin-bottom: 10px; color: var(--text-secondary); }
+    .policy__block ul { list-style: none; padding-left: 0; }
+    .policy__block li { position: relative; padding-left: 20px; margin-bottom: 8px; color: var(--text-secondary); }
+    .policy__block li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--accent);
+      opacity: 0.7;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 32px;
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .back-link:hover { color: var(--accent-hover); }
+    .site-footer { padding: 24px 0; background-color: var(--bg-secondary); border-top: 1px solid var(--border-color); text-align: center; }
+    .site-footer p { font-size: 13px; color: var(--text-muted); }
+
+    /* Мобильный */
+    @media (max-width: 575px) {
+      .page-top { padding: 80px 0 20px; }
+      .page-top__inner h1 { font-size: 26px; }
+      .policy { padding: 32px 0 56px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="page-top">
+    <div class="container page-top__inner">
+      <h1>Политика конфиденциальности</h1>
+      <p>Обработка персональных данных посетителей сайта (в соответствии с ФЗ-152 «О персональных данных»)</p>
+    </div>
+  </header>
+
+  <main class="policy">
+    <div class="container">
+
+      <section class="policy__block">
+        <h2>1. Общие положения</h2>
+        <p>
+          Настоящая Политика конфиденциальности определяет порядок обработки и защиты персональных данных
+          посетителей сайта-портфолио Красавина Александра (далее — «Оператор»), размещённого по адресу
+          <strong>alex-krasavin.github.io/portfolio/vanilla/</strong>.
+        </p>
+        <p>
+          Используя сайт и оставляя заявку через формы обратной связи, посетитель выражает согласие
+          с условиями настоящей Политики в соответствии со статьёй 9 ФЗ-152.
+        </p>
+      </section>
+
+      <section class="policy__block">
+        <h2>2. Какие данные мы собираем</h2>
+        <p>При заполнении форм обратной связи (заявка, квиз, модальное окно) мы получаем:</p>
+        <ul>
+          <li>имя (как к вам обращаться);</li>
+          <li>адрес электронной почты (email);</li>
+          <li>логин Telegram (при указании);</li>
+          <li>текст сообщения или пожеланий (при указании).</li>
+        </ul>
+        <p>
+          Сайт также использует файлы cookies для корректной работы (тема оформления) и localStorage
+          для запоминания настроек на устройстве посетителя.
+        </p>
+      </section>
+
+      <section class="policy__block">
+        <h2>3. Цели обработки</h2>
+        <ul>
+          <li>обработка и ответ на вашу заявку;</li>
+          <li>связь с вами для уточнения деталей проекта и расчёта стоимости;</li>
+          <li>подготовка коммерческого предложения.</li>
+        </ul>
+      </section>
+
+      <section class="policy__block">
+        <h2>4. Правовые основания</h2>
+        <p>
+          Обработка осуществляется на основании согласия субъекта персональных данных
+          (п. 1 ч. 1 ст. 6 ФЗ-152) — оно выражается проставлением галочки в чекбоксе
+          «Согласие на обработку персональных данных» в формах сайта.
+        </p>
+      </section>
+
+      <section class="policy__block">
+        <h2>5. Передача данных третьим лицам</h2>
+        <p>
+          Персональные данные не передаются третьим лицам, за исключением случаев, предусмотренных
+          действующим законодательством РФ. Оператор не продаёт и не передаёт данные в маркетинговых целях.
+        </p>
+      </section>
+
+      <section class="policy__block">
+        <h2>6. Защита данных</h2>
+        <p>
+          Оператор принимает необходимые организационные и технические меры для защиты персональных данных
+          от неправомерного доступа, изменения, раскрытия или уничтожения.
+        </p>
+      </section>
+
+      <section class="policy__block">
+        <h2>7. Права субъекта персональных данных</h2>
+        <p>Вы вправе (ст. 14 ФЗ-152):</p>
+        <ul>
+          <li>получить информацию об обработке ваших персональных данных;</li>
+          <li>требовать уточнения, блокирования или уничтожения данных;</li>
+          <li>отозвать согласие на обработку персональных данных в любой момент.</li>
+        </ul>
+      </section>
+
+      <section class="policy__block">
+        <h2>8. Контакты</h2>
+        <p>
+          По вопросам, связанным с обработкой персональных данных, вы можете обратиться
+          по электронной почте: <a href="mailto:hello@example.com" class="back-link" style="margin-top:0;display:inline;">hello@example.com</a>
+        </p>
+      </section>
+
+      <a href="index.html" class="back-link">← Назад на главную</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year">2026</span> Красавин Александр · Политика конфиденциальности</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = String(new Date().getFullYear());
+  </script>
+</body>
+</html>

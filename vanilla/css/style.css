@@ -253,6 +253,7 @@ button {
   font-size: 15px;
   font-weight: 500;
   color: var(--text-secondary, var(--text-muted));
+  white-space: nowrap; /* пункты меню не должны переноситься (задача 3) */
   transition: color 0.2s ease, background-color 0.2s ease;
 }
 
@@ -649,7 +650,7 @@ button {
 /* --- Секция "Квиз" (собирает ТЗ) --- */
 .quiz {
   padding: 96px 0;
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-primary);
 }
 
 .quiz__head {
@@ -1328,7 +1329,7 @@ button {
 
 .process__list {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
@@ -1369,6 +1370,498 @@ button {
   font-size: 14px;
   line-height: 1.6;
   color: var(--text-secondary);
+}
+
+/* --- Секция "Навыки" --- */
+.skills {
+  padding: 96px 0;
+  background-color: var(--bg-primary);
+}
+
+.skills__head {
+  max-width: 640px;
+  margin: 0 auto 56px;
+  text-align: center;
+}
+
+.skills__subtitle {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.skills__title {
+  font-family: "Unbounded", sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.skills__text {
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
+/* Сетка навыков: карточки-плитки */
+.skills__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.skills__item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 28px 24px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skills__item:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 32px var(--shadow-color);
+}
+
+.skills__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  background-color: var(--accent-soft);
+  color: var(--accent);
+}
+
+.skills__name {
+  font-family: "Unbounded", sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.skills__level {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+/* --- Секция "Обо мне" --- */
+.about {
+  padding: 96px 0;
+  background-color: var(--bg-secondary);
+}
+
+.about__inner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.about__subtitle {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.about__title {
+  font-family: "Unbounded", sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+
+.about__text {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.about__text:last-child {
+  margin-bottom: 0;
+}
+
+/* Цифры-факты */
+.about__facts {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.about__fact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 28px 24px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about__fact:hover {
+  border-color: var(--accent);
+  box-shadow: 0 12px 32px var(--shadow-color);
+}
+
+.about__fact-value {
+  font-family: "Unbounded", sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.about__fact-label {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* --- Секция "Контакты" --- */
+.contacts {
+  padding: 96px 0;
+  background-color: var(--bg-primary);
+}
+
+.contacts__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.contacts__subtitle {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.contacts__title {
+  font-family: "Unbounded", sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+
+.contacts__text {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+}
+
+.contacts__list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contacts__item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.contacts__item-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.contacts__link {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: color 0.2s ease;
+}
+
+.contacts__link:hover {
+  color: var(--accent);
+}
+
+/* Форма заявки */
+.contacts__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 40px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  box-shadow: 0 16px 48px var(--shadow-color);
+}
+
+.contacts__form-title {
+  font-family: "Unbounded", sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.contacts__field {
+  display: block;
+}
+
+.contacts__label {
+  display: block;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.contacts__input,
+.contacts__textarea {
+  width: 100%;
+  padding: 0 16px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 16px;
+  transition: border-color 0.25s ease;
+}
+
+.contacts__input {
+  height: 52px;
+}
+
+.contacts__textarea {
+  display: block;
+  min-height: 120px;
+  padding: 12px 16px;
+  line-height: 1.5;
+  resize: none;
+}
+
+.contacts__input:focus,
+.contacts__textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.contacts__input::placeholder,
+.contacts__textarea::placeholder {
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+/* Согласие ПДн */
+.contacts__consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.contacts__consent input {
+  accent-color: var(--accent);
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.contacts__submit {
+  width: 100%;
+}
+
+.contacts__note {
+  min-height: 20px;
+  font-size: 14px;
+  color: var(--accent);
+  text-align: center;
+}
+
+.contacts__note.is-error {
+  color: #EF4444;
+}
+
+/* --- Honeypot-поля (скрытая ловушка против спам-ботов, правило 9.4) --- */
+.contacts__honeypot,
+.modal__honeypot {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* --- Модальное окно --- */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.modal[hidden] {
+  display: none;
+}
+
+.modal__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(11, 18, 32, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.modal__dialog {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  box-shadow: 0 24px 80px var(--shadow-color);
+  padding: 40px;
+}
+
+/* Крестик закрытия — строго по центру, через SVG (правило 11.4) */
+.modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  color: var(--text-muted);
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+.modal__close:hover {
+  color: var(--accent);
+  background-color: var(--hover-bg);
+}
+
+.modal__content h3 {
+  font-family: "Unbounded", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.modal__text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 28px;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modal__field {
+  display: block;
+}
+
+.modal__label {
+  display: block;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.modal__input {
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 16px;
+  transition: border-color 0.25s ease;
+}
+
+.modal__input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.modal__input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+.modal__consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.modal__consent input {
+  accent-color: var(--accent);
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.modal__submit {
+  width: 100%;
+}
+
+.modal__note {
+  min-height: 20px;
+  font-size: 14px;
+  color: var(--accent);
+  text-align: center;
+}
+
+.modal__note.is-error {
+  color: #EF4444;
 }
 
 /* --- Секция "Отзывы" --- */
@@ -1463,6 +1956,139 @@ button {
   display: block;
   font-size: 13px;
   color: var(--text-muted);
+}
+
+/* --- Секция "FAQ" --- */
+.faq {
+  padding: 96px 0;
+  background-color: var(--bg-secondary);
+}
+
+.faq__head {
+  max-width: 640px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+.faq__subtitle {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.faq__title {
+  font-family: "Unbounded", sans-serif;
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.faq__list {
+  max-width: 720px;
+  margin: 0 auto;
+  display: grid;
+  gap: 12px;
+}
+
+.faq__item {
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  background-color: var(--bg-secondary);
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.faq__item:hover {
+  border-color: var(--accent);
+}
+
+.faq__item.is-open {
+  border-color: var(--accent);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.faq__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 20px 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.faq__question:hover {
+  color: var(--accent);
+}
+
+.faq__icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-color);
+  transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.faq__icon::before,
+.faq__icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--text-primary);
+  transition: background-color 0.3s ease;
+}
+
+.faq__icon::before {
+  width: 10px;
+  height: 1.5px;
+}
+
+.faq__icon::after {
+  width: 1.5px;
+  height: 10px;
+}
+
+.faq__question[aria-expanded="true"] .faq__icon {
+  transform: rotate(45deg);
+  border-color: var(--accent);
+  background-color: var(--accent);
+}
+
+.faq__question[aria-expanded="true"] .faq__icon::before,
+.faq__question[aria-expanded="true"] .faq__icon::after {
+  background-color: var(--btn-primary-text);
+}
+
+.faq__answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.faq__item.is-open .faq__answer {
+  max-height: 300px;
+}
+
+.faq__answer p {
+  padding: 0 24px 20px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-secondary);
 }
 
 /* --- Подвал --- */
@@ -1768,8 +2394,19 @@ button {
   .process__list { grid-template-columns: repeat(2, 1fr); }
   .process__title { font-size: 30px; }
 
+  .skills__grid { grid-template-columns: repeat(2, 1fr); }
+  .skills__title { font-size: 30px; }
+
+  .about__inner { grid-template-columns: 1fr; gap: 40px; }
+  .about__title { font-size: 30px; }
+
+  .contacts__inner { grid-template-columns: 1fr; gap: 40px; }
+  .contacts__title { font-size: 30px; }
+
   .reviews__grid { grid-template-columns: 1fr; }
   .reviews__title { font-size: 30px; }
+
+  .faq__title { font-size: 30px; }
 
   .footer__inner { grid-template-columns: 1fr 1fr; gap: 32px; }
 }
@@ -1827,11 +2464,21 @@ button {
 
   .why__title,
   .process__title,
-  .reviews__title { font-size: 26px; }
+  .skills__title,
+  .about__title,
+  .contacts__title,
+  .services__title,
+  .quiz__title,
+  .reviews__title,
+  .faq__title { font-size: 26px; }
 
   .why__stats { grid-template-columns: 1fr; }
   .process__list { grid-template-columns: 1fr; }
+  .skills__grid { grid-template-columns: 1fr; }
   .footer__inner { grid-template-columns: 1fr; gap: 28px; }
+
+  .contacts__form { padding: 28px 20px; }
+  .modal__dialog { padding: 32px 24px; }
 
   .cookie__inner { flex-direction: column; align-items: stretch; gap: 16px; }
   .cookie__accept { width: 100%; }

@@ -1,0 +1,14 @@
+# robots.txt — портфолио Красавина Александра
+# Разрешаем индексацию всем поисковым роботам
+
+User-agent: *
+Allow: /
+
+# Исключаем системные и служебные пути
+Disallow: /css/
+Disallow: /js/
+Disallow: /fonts/
+Disallow: /images/
+
+# Карта сайта
+Sitemap: https://alex-krasavin.github.io/portfolio/vanilla/sitemap.xml
